@@ -1,9 +1,18 @@
 export interface Slot{
-    id: Number,
-    start: String,
-    end: String,
-    players: Number | null,
-    name: String |  null,
-    companyName: String | null,
-    room: String
+    id: number,
+    start: Date,
+    end: Date,
+    players: number | null,
+    name: string |  null,
+    companyName: string | null,
+    room: string
+}
+export interface SlotDto{
+    id: number,
+    start: | string,
+    end: Date | string,
+    players: number | null,
+    name: string |  null,
+    companyName: string | null,
+    room: string
 }

@@ -1,5 +1,16 @@
 import DataStatus from "../types/DataStatus.ts";
 import { useCheckInSlots } from "../hooks/useCheckInSlots.ts";
+import { useEffect } from "react";
+import { SlotCard } from "../components/SlotCard.tsx";
+import type { Slot } from "../types/Slot.ts";
+import "./SlotPage.css";
+
+function isBooked(slot: Slot): boolean {
+    return Boolean(
+        slot.name?.trim() ||
+        slot.companyName?.trim()
+    );
+}
 
 export default function SlotsPage() {
     const {
@@ -8,38 +19,48 @@ export default function SlotsPage() {
         fetchCheckInSlots,
     } = useCheckInSlots();
 
-    const isLoading =
-        checkInSlotsLoading === DataStatus.LOADING;
+    useEffect(() => {
+        void fetchCheckInSlots();
+    }, [fetchCheckInSlots]);
+
+    const bookedSlots = checkInSlots.filter(isBooked);
+    const availableSlots = checkInSlots.filter(
+        slot => !isBooked(slot),
+    );
 
     return (
         <section>
-            <h1>Backend test</h1>
+            <h1>Check In</h1>
 
-            <button
-                type="button"
-                onClick={fetchCheckInSlots}
-                disabled={isLoading}
-            >
-                {isLoading
-                    ? "Loading..."
-                    : "Fetch check-in slots"}
-            </button>
+            {checkInSlotsLoading === DataStatus.LOADING && (
+                <p>Loading...</p>
+            )}
 
             {checkInSlotsLoading === DataStatus.ERROR && (
-                <p role="alert">
-                    Error
-                </p>
+                <p>Error</p>
             )}
 
             {checkInSlotsLoading === DataStatus.SUCCESS && (
                 <>
-                    <p>
-                        Received {checkInSlots.length} slots.
-                    </p>
+                    <div className="slot-grid">
+                        {bookedSlots.map(slot => (
+                            <SlotCard
+                                key={slot.id}
+                                slot={slot}
+                            />
+                        ))}
+                    </div>
 
-                    <pre>
-                        {JSON.stringify(checkInSlots, null, 2)}
-                    </pre>
+                    <h3>More:</h3>
+
+                    <div className="slot-grid">
+                        {availableSlots.map(slot => (
+                            <SlotCard
+                                key={slot.id}
+                                slot={slot}
+                            />
+                        ))}
+                    </div>
                 </>
             )}
         </section>

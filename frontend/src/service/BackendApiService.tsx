@@ -1,4 +1,4 @@
-import type { Slot } from "../types/Slot.ts";
+import type {Slot, SlotDto} from "../types/Slot.ts";
 
 class HttpError extends Error {
     constructor(
@@ -42,7 +42,29 @@ async function getJson<T>(url: string): Promise<T> {
 }
 
 export const checkInApi = {
-    fetchCheckInSlots(): Promise<Slot[]> {
-        return getJson<Slot[]>("/api/quinbook/checkInSlots");
+    async fetchCheckInSlots(): Promise<Slot[]> {
+        const slots = await getJson<SlotDto[]>("/api/quinbook/checkInSlots");
+        return (
+            slots.map(slotDtoToSlot)
+        );
     },
 };
+
+function slotDtoToSlot(dto: SlotDto): Slot {
+    const start = new Date(dto.start);
+    const end = new Date(dto.end);
+
+    if (Number.isNaN(start.getTime())) {
+        throw new Error(`Invalid start slot start date: ${dto.start}`);
+    }
+
+    if (Number.isNaN(end.getTime())) {
+        throw new Error(`Invalid end slot end date: ${dto.end}`);
+    }
+
+    return {
+        ...dto,
+        start,
+        end,
+    };
+}
