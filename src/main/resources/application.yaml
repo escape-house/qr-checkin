@@ -1,0 +1,29 @@
+ktor:
+  deployment:
+    port: "$KTOR_PORT:8080"
+
+  application:
+    modules:
+      - at.escapehouse.routing.RoutingKt.configureRouting
+      - at.escapehouse.MainKt.configureSerialization
+      - at.escapehouse.MainKt.configureErrorHandling
+      - at.escapehouse.MainKt.configureCors
+
+    dependencies:
+      - at.escapehouse.service.HttpClientKt.provideHttpClient
+      - at.escapehouse.config.QuinbookConfigKt.provideQuinbookConfig
+      - at.escapehouse.config.MongoConfigKt.provideMongoConfig
+      - at.escapehouse.config.MongoConfigKt.provideMongoDatabase
+      - at.escapehouse.repository.MongoCheckInRepositoryImpl
+      - at.escapehouse.service.QuinbookService
+      - at.escapehouse.service.QuinbookAuth
+      - at.escapehouse.service.CheckInService
+
+quinbook:
+  clientId: "$QUINBOOK_CLIENT_ID"
+  clientSecret: "$QUINBOOK_CLIENT_SECRET"
+  baseUrl: "$QUINBOOK_BASE_URL:https://api2.quinbook.com"
+
+mongodb:
+  connectionString: "$MONGODB_CONNECTION_STRING"
+  database: "$MONGODB_DATABASE:escape-house"

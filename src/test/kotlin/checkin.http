@@ -1,0 +1,53 @@
+### Check in without slot
+POST http://localhost:8080/checkin/Winkelgasse
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "agreesToTermsAndCondition": true,
+  "wantsPhotosOnline": true
+}
+
+###
+
+### Check in with slot
+POST http://localhost:8080/checkin/Winkelgasse/12345
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "jane.smith@example.com",
+  "agreesToTermsAndCondition": true,
+  "wantsPhotosOnline": false
+}
+
+###
+
+### Invalid request (missing agreement)
+POST http://localhost:8080/checkin/Winkelgasse/12345
+Content-Type: application/json
+
+{
+  "firstName": "Max",
+  "lastName": "Mustermann",
+  "email": "max@example.com",
+  "agreesToTermsAndCondition": false,
+  "wantsPhotosOnline": true
+}
+
+###
+
+### Invalid slot
+POST http://localhost:8080/checkin/Winkelgasse/abc
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john@example.com",
+  "agreesToTermsAndCondition": true,
+  "wantsPhotosOnline": true
+}
