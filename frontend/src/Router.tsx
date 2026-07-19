@@ -9,8 +9,8 @@ function Router() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<SlotsPage />} />
-                <Route path="/checking/:slotId" element={<Checkin />} />
-                <Route path="/checking/" element={<Checkin />} />
+                <Route path="/checkin/:slotId" element={<Checkin />} />
+                <Route path="/checkin/" element={<Checkin />} />
             </Routes>
         </BrowserRouter>
         </>

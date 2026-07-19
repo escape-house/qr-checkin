@@ -1,8 +1,8 @@
 import DataStatus from "../types/DataStatus.ts";
-import { useCheckInSlots } from "../hooks/useCheckInSlots.ts";
+import {useCheckInSlots} from "../hooks/useCheckInSlots.ts";
 import {useEffect, useState} from "react";
-import { SlotCard } from "../components/SlotCard.tsx";
-import type { Slot } from "../types/Slot.ts";
+import {SlotCard} from "../components/SlotCard.tsx";
+import type {Slot} from "../types/Slot.ts";
 import "./SlotPage.css";
 
 function isBooked(slot: Slot): boolean {
@@ -18,11 +18,15 @@ export default function SlotsPage() {
         checkInSlotsLoading,
         fetchCheckInSlots,
     } = useCheckInSlots();
-    const [unbookedSlotsExpanded, setUnbookedSlotsExpanded] = useState(false)
 
     useEffect(() => {
-        void fetchCheckInSlots();
+        if (checkInSlotsLoading != DataStatus.SUCCESS){
+            fetchCheckInSlots();
+            console.log("Here")
+        }
     }, [fetchCheckInSlots]);
+
+    const [unbookedSlotsExpanded, setUnbookedSlotsExpanded] = useState(false)
 
     const bookedSlots = checkInSlots.filter(isBooked);
     const availableSlots = checkInSlots.filter(

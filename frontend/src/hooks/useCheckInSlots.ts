@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import DataStatus from "../types/DataStatus.ts";
 import type { Slot } from "../types/Slot.ts";
-import {checkInApi} from "../service/BackendApiService.tsx";
+import {checkInApi} from "../service/BackendApiService.ts";
 
 export function useCheckInSlots() {
     const [checkInSlotsLoading, setCheckInSlotsLoading] = useState(DataStatus.NO_STATUS);
