@@ -69,15 +69,14 @@ class QuinbookService(
             if (currentCache != null && !isCacheExpired(cacheTimeout)) { //Recheck for the ones waiting in the lock
                 return@withLock currentCache
             }
-            val freshSlots = fetchSlotsFromBackend()
+            val freshSlots = fetchSlotsFromBackend(LocalDate.now())
             cachedSlots = freshSlots
             lastCacheUpdate = System.currentTimeMillis()
             freshSlots
         }
     }
 
-    private suspend fun fetchSlotsFromBackend(): List<Slot> {
-        val date = LocalDate.now()
+    private suspend fun fetchSlotsFromBackend(date: LocalDate): List<Slot> {
         val response = fetch("/v1/slots/calendar/$date")
 
         if (response.status != HttpStatusCode.OK) {
@@ -105,6 +104,12 @@ class QuinbookService(
 
             !now.isBefore(checkInStart) && !now.isAfter(checkInEnd)
         }
+
+    suspend fun getSlot(date: LocalDate, slotId: Long) =
+        fetchSlotsFromBackend(date).find {
+            it.id == slotId
+        }
+
 
     private suspend fun fetch(path: String) =
         httpClient.get("${quinbookConfig.baseUrl}$path") {

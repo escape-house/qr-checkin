@@ -1,5 +1,6 @@
 package at.escapehouse
 
+import at.escapehouse.auth.AdminSession
 import at.escapehouse.data.ErrorResponse
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
@@ -8,11 +9,17 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
+import io.ktor.server.auth.Authentication
+import io.ktor.server.auth.session
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.respond
+import io.ktor.server.sessions.Sessions
+import io.ktor.server.sessions.cookie
 import kotlinx.serialization.json.Json
+import java.time.Instant
+
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.configureSerialization() {

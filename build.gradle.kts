@@ -29,6 +29,8 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:3.5.0")
     implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.0")
     implementation("io.ktor:ktor-server-cors:3.5.0")
+    implementation("io.ktor:ktor-server-auth:3.5.0")
+    implementation("io.ktor:ktor-server-sessions:3.5.0")
     // MongoDB
     implementation("org.mongodb:mongodb-driver-kotlin-coroutine:5.9.0")
     implementation("io.ktor:ktor-server-status-pages:3.5.0")

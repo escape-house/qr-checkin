@@ -47,7 +47,7 @@ class CheckInService(
             wantsPhotosOnline =
                 checkInForm.wantsPhotosOnline,
             roomName = normalizedRoomName,
-            slotId = slotId
+            slotId = slotId?:-1
         )
 
         checkInRepository.insertOne(declaration)

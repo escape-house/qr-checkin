@@ -39,3 +39,21 @@ data class CheckinSlotDto(
         }
     }
 }
+@Serializable
+data class PrivacyCheckinSlotDto(
+    val id: Long?,
+    @kotlinx.serialization.Serializable(with = LocalDateSerializer::class)
+    val start: LocalDateTime,
+    @Serializable(with = LocalDateSerializer::class)
+    val end: LocalDateTime,
+    val room: String?,
+) {
+    companion object {
+        fun fromSlot(slot: Slot) = PrivacyCheckinSlotDto(
+                slot.id,
+                slot.start,
+                slot.end,
+                slot.room.name,
+            )
+    }
+}
