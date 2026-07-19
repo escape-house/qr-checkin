@@ -1,6 +1,6 @@
 import DataStatus from "../types/DataStatus.ts";
 import { useCheckInSlots } from "../hooks/useCheckInSlots.ts";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { SlotCard } from "../components/SlotCard.tsx";
 import type { Slot } from "../types/Slot.ts";
 import "./SlotPage.css";
@@ -18,6 +18,7 @@ export default function SlotsPage() {
         checkInSlotsLoading,
         fetchCheckInSlots,
     } = useCheckInSlots();
+    const [unbookedSlotsExpanded, setUnbookedSlotsExpanded] = useState(false)
 
     useEffect(() => {
         void fetchCheckInSlots();
@@ -51,16 +52,19 @@ export default function SlotsPage() {
                         ))}
                     </div>
 
-                    <h3>More:</h3>
-
-                    <div className="slot-grid">
-                        {availableSlots.map(slot => (
-                            <SlotCard
-                                key={slot.id}
-                                slot={slot}
-                            />
-                        ))}
-                    </div>
+                    <button onClick={()=>{setUnbookedSlotsExpanded(!unbookedSlotsExpanded)}}>
+                        {unbookedSlotsExpanded?"Less":"More"}
+                    </button>
+                    {unbookedSlotsExpanded && (
+                        <div className="slot-grid">
+                            {availableSlots.map(slot => (
+                                <SlotCard
+                                    key={slot.id}
+                                    slot={slot}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </>
             )}
         </section>
