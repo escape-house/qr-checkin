@@ -13,12 +13,11 @@ fun Route.quinbookRoutes(
     quinbookAuth: QuinbookAuth
 ) {
     route("/quinbook") {
-        get("/nextBookings") {
-            call.respond(quinbookService.getBookingsOfToday())
-        }
-
         get("/checkInSlots") {
             call.respond(quinbookService.getCheckInSlots().map(CheckinSlotDto::fromSlot))
+        }
+        get("/slotsOfToday") {
+            call.respond(quinbookService.getSlotsOfToday().map(CheckinSlotDto::fromSlot))
         }
 
         get("/token") {

@@ -75,7 +75,6 @@ export function SlotCard({ slot }: SlotProps) {
                     {slot.players != null && (
                         <span className="slot-card__players">
                             {playerCountText}
-                            <span aria-hidden="true"> × </span>
                             <span className="slot-card__players-label">
                                 Spieler
                             </span>

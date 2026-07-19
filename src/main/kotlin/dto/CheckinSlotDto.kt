@@ -15,18 +15,27 @@ data class CheckinSlotDto(
     val players: Int?,
     val name: String?,
     val companyName: String?,
-    val room: String?
+    val room: String?,
 ) {
     companion object {
-        fun fromSlot(slot: Slot) =
-            CheckinSlotDto(
-slot.id,
+        fun fromSlot(slot: Slot): CheckinSlotDto {
+            val name =
+                if (slot.customer == null) ""
+                else if(slot.customer.firstName?.isNotBlank() == true && slot.customer.lastName?.isNotBlank() == true)"${slot.customer?.firstName?.trim()} ${slot.customer?.lastName?.trim()[0]}."
+                else if (slot.customer.firstName.isNullOrBlank() && slot.customer.lastName.isNullOrBlank()) ""
+                else if (slot.customer.firstName.isNullOrBlank() && slot.customer.lastName?.isNotBlank() == true)  slot.customer.lastName.trim()
+                else if (slot.customer.lastName.isNullOrBlank() && slot.customer.firstName?.isNotBlank() == true)  slot.customer.firstName.trim()
+                else ""
+
+            return CheckinSlotDto(
+                slot.id,
                 slot.start,
                 slot.end,
                 slot.players,
-                "${slot.customer?.firstName?.trim()} ${slot.customer?.lastName?.trim()[0]}.", //"John D."
-                slot.customer?.companyName,
-                slot.room.name
+                name,
+                slot.customer?.companyName?.trim(),
+                slot.room.name,
             )
+        }
     }
 }

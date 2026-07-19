@@ -43,7 +43,8 @@ async function getJson<T>(url: string): Promise<T> {
 
 export const checkInApi = {
     async fetchCheckInSlots(): Promise<Slot[]> {
-        const slots = await getJson<SlotDto[]>("/api/quinbook/checkInSlots");
+        const slots = await getJson<SlotDto[]>("/api/quinbook/slotsOfToday");
+        //const slots = await getJson<SlotDto[]>("/api/quinbook/checkInSlots");
         return (
             slots.map(slotDtoToSlot)
         );
