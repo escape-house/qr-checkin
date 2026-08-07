@@ -1,6 +1,8 @@
 package at.escapehouse.routing
 
 import at.escapehouse.auth.AdminPingResponse
+import at.escapehouse.repository.CheckInRepository
+import at.escapehouse.routes.adminDashBoardRoutes
 import at.escapehouse.routes.adminRegistrationRoutes
 import at.escapehouse.routes.quinbookRoutes
 import at.escapehouse.service.AdminRegistrationService
@@ -18,16 +20,16 @@ fun Application.configureRouting(
     quinbookService: QuinbookService,
     quinbookAuth: QuinbookAuth,
     checkInService: CheckInService,
-    adminRegistrationService: AdminRegistrationService
+    adminRegistrationService: AdminRegistrationService,
+    checkInRepository: CheckInRepository
 ) {
     routing {
         route("/api"){
             quinbookRoutes(quinbookService, quinbookAuth)
             checkInRoutes(checkInService)
             authenticate("admin-session") {
-                adminRegistrationRoutes(
-                    adminRegistrationService
-                )
+                adminRegistrationRoutes(adminRegistrationService)
+                adminDashBoardRoutes(quinbookService, checkInRepository)
             }
         }
         fronted()

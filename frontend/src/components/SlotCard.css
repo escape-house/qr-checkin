@@ -152,3 +152,46 @@
         display: none;
     }
 }
+
+.admin-slot-card--blocked {
+    background: #f4f1f1;
+    border-color: #caa8a8;
+}
+
+.admin-slot-card--blocked
+.admin-slot-card__header {
+    background:
+            repeating-linear-gradient(
+                    -45deg,
+                    rgba(130, 45, 45, 0.035),
+                    rgba(130, 45, 45, 0.035) 10px,
+                    transparent 10px,
+                    transparent 20px
+            );
+}
+
+.admin-slot-card__booking-name {
+    min-height: 1.5em;
+}
+
+.admin-slot-card__booking-name--blocked {
+    color: #862f2f;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.admin-slot-card__blocked-badge {
+    padding: 5px 9px;
+    color: #832d2d;
+    font-size: 0.76rem;
+    font-weight: 750;
+    background: #f4dddd;
+    border: 1px solid #dfb7b7;
+    border-radius: 999px;
+}
+
+.admin-slot-card--blocked
+.admin-slot-card__progress-value {
+    background: #9c6262;
+}

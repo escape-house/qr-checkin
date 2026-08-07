@@ -4,6 +4,7 @@ import Checkin from "./pages/Checkin.tsx";
 import AdminProtectedRoute from "./admin/AdminProtectedRoute.tsx";
 import AdminRegistrationsPage from "./pages/AdminRegistrationPage.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
+import AdminDashboardPage from "./pages/AdminDashboardPage.tsx";
 
 function Router() {
 
@@ -20,6 +21,10 @@ function Router() {
                 />
 
                 <Route element={<AdminProtectedRoute />}>
+                    <Route
+                        path="/admin/dashboard"
+                        element={<AdminDashboardPage />}>
+                    </Route>
                     <Route
                         path="/admin/registrations"
                         element={<AdminRegistrationsPage />}

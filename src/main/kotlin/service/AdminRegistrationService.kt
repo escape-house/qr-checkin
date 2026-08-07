@@ -17,6 +17,7 @@ class AdminRegistrationService(
         pageSize: Int,
         name: String?,
         date: LocalDate?,
+        slotId: Long? = null
     ): AdminRegistrationPageResponse {
         require(page >= 0) {
             "Page must not be negative"
@@ -31,6 +32,7 @@ class AdminRegistrationService(
             pageSize = pageSize,
             name = name,
             date = date,
+            slotId = slotId
         )
 
         val totalPages =

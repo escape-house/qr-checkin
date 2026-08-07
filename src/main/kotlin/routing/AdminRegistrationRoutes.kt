@@ -54,7 +54,7 @@ fun Route.adminRegistrationRoutes(
                 page = page,
                 pageSize = pageSize,
                 name = name,
-                date = date,
+                date = date
             )
 
             call.respond(

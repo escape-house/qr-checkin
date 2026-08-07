@@ -27,6 +27,7 @@ fun Route.quinbookRoutes(
         get("/slot/{date}/{slotId}") {
             val dateParameter = call.parameters["date"]
                 ?: throw IllegalArgumentException("Missing date")
+            call.respond(quinbookService.getCheckInSlots().map(CheckinSlotDto::fromSlot))
 
             val date = try {
                 LocalDate.parse(dateParameter)

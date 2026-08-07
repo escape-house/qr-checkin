@@ -51,10 +51,12 @@ class MongoCheckInRepositoryImpl(
         pageSize: Int,
         name: String?,
         date: LocalDate?,
+        slotId: Long?
     ): RegistrationPageResult {
         val filter = createRegistrationFilter(
             name = name,
             date = date,
+            slotId
         )
 
         val totalItems =
@@ -143,6 +145,7 @@ class MongoCheckInRepositoryImpl(
     private fun createRegistrationFilter(
         name: String?,
         date: LocalDate?,
+        slotId: Long?
     ): Bson {
         val filters = mutableListOf<Bson>()
 
@@ -193,6 +196,10 @@ class MongoCheckInRepositoryImpl(
                     "createdAt",
                     nextDayStart,
                 ),
+                Filters.eq(
+                    "slotId",
+                    slotId
+                )
             )
         }
 

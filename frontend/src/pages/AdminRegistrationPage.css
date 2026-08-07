@@ -342,3 +342,72 @@
         grid-template-columns: 1fr;
     }
 }
+.admin-dashboard-header,
+.registrations-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 30px;
+}
+
+.admin-dashboard-header__title,
+.registrations-header__title {
+    min-width: 0;
+}
+
+.admin-dashboard-header__right,
+.registrations-header__right {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.admin-dashboard-header__actions {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.admin-dashboard-header__actions button {
+    white-space: nowrap;
+}
+
+.registrations-header__count {
+    display: flex;
+    min-height: 54px;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 18px;
+    white-space: nowrap;
+}
+@media (max-width: 1050px) {
+    .admin-dashboard-header,
+    .registrations-header {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-dashboard-header__right,
+    .registrations-header__right {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 720px) {
+    .admin-dashboard-header__right,
+    .registrations-header__right {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-dashboard-header__actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .registrations-header__count {
+        width: fit-content;
+    }
+}

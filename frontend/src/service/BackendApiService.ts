@@ -4,6 +4,7 @@ import type {
 } from "../types/Slot.ts";
 import type {CheckInForm} from "../types/CheckInForm.ts";
 import type {Registration, RegistrationFilter, RegistrationPage, RegistrationUpdate} from "../types/Registration.ts";
+import type {AdminCheckInSlot, AdminCheckInSlotDto} from "../types/AdminDashBoard.ts";
 
 export class HttpError extends Error {
     constructor(
@@ -316,5 +317,61 @@ export const registrationApi = {
                 },
             },
         );
+    },
+};
+
+function adminSlotDtoToSlot(
+    dto: AdminCheckInSlotDto,
+): AdminCheckInSlot {
+    const start = new Date(dto.start);
+    const end = new Date(dto.end);
+
+    if (Number.isNaN(start.getTime())) {
+        throw new Error(
+            `Invalid dashboard slot start date: ${dto.start}`,
+        );
+    }
+
+    if (Number.isNaN(end.getTime())) {
+        throw new Error(
+            `Invalid dashboard slot end date: ${dto.end}`,
+        );
+    }
+
+    return {
+        ...dto,
+        start,
+        end,
+        checkedInPlayers:
+            dto.checkedInPlayers ?? [],
+    };
+}
+
+export const adminDashboardApi = {
+    async fetchDashboard(): Promise<AdminCheckInSlot[]> {
+        const response =
+            await request<AdminCheckInSlotDto[]>(
+                "/api/admin/dashboard",
+                {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                    },
+                },
+            );
+
+        if (!Array.isArray(response)) {
+            throw new Error(
+                "The dashboard endpoint did not return a slot array",
+            );
+        }
+
+        return response
+            .map(adminSlotDtoToSlot)
+            .sort(
+                (first, second) =>
+                    first.start.getTime() -
+                    second.start.getTime(),
+            );
     },
 };

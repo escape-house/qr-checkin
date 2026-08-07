@@ -77,7 +77,9 @@ class QuinbookService(
     }
 
     private suspend fun fetchSlotsFromBackend(date: LocalDate): List<Slot> {
-        val response = fetch("/v1/slots/calendar/$date")
+
+        val response = fetch("/v1/slots/calendar/2026-07-25")
+        //val response = fetch("/v1/slots/calendar/$date")
 
         if (response.status != HttpStatusCode.OK) {
             throw RuntimeException(
@@ -91,12 +93,14 @@ class QuinbookService(
     }
 
     suspend fun getBookingsOfToday() =
-        getSlotsOfToday().filterNot(Slot::isAvailable)
+        getSlotsOfToday().filter{
+            !it.isAvailable && it.type!="mask"
+        }
 
     suspend fun getCheckInSlots() =
         getSlotsOfToday().filter { booking ->
-            val now = LocalDateTime.now()
-            //val now = LocalDateTime.parse("2026-07-17T16:00:00")
+            //val now = LocalDateTime.now()
+            val now = LocalDateTime.parse("2026-07-25T16:00:00")
             //val checkInStart = booking.start.minusMinutes(30)
             //val checkInEnd = booking.start.plusMinutes(20)
             val checkInStart = booking.start.minusMinutes(60)

@@ -1,27 +1,14 @@
-import {
-    useCallback,
-    useEffect,
-    useState,
-} from "react";
-import {
-    NavLink,
-    useNavigate,
-} from "react-router-dom";
-import {
-    HttpError,
-    registrationApi,
-} from "../service/BackendApiService.ts";
-import type {
-    Registration,
-    RegistrationPage,
-    RegistrationUpdate,
-} from "../types/Registration.ts";
+import {useCallback, useEffect, useState,} from "react";
+import {useNavigate,} from "react-router-dom";
+import {HttpError, registrationApi,} from "../service/BackendApiService.ts";
+import type {Registration, RegistrationPage, RegistrationUpdate,} from "../types/Registration.ts";
 import "./AdminRegistrationPage.css";
 import {RegistrationFilters} from "../components/admin/regitrations/RegistrationFilters.tsx";
 import {EditRegistrationDialog} from "../components/admin/regitrations/EditRegistrationDialog.tsx";
 import {RegistrationsPagination} from "../components/admin/regitrations/RegistrationsPagination.tsx";
 import {RegistrationsTable} from "../components/admin/regitrations/RegistrationsTable.tsx";
 import {registrationToUpdate} from "../utils/registrationUtil.ts";
+import {AdminNavigation} from "../components/admin/AdminNavigation.tsx";
 
 const PAGE_SIZE = 20;
 
@@ -70,7 +57,7 @@ export default function AdminRegistrationsPage() {
         navigate("/admin", {
             replace: true,
             state: {
-                redirectTo: "/admin/registrations",
+                redirectTo: "/admin/dashBoard",
             },
         });
     }, [navigate]);
@@ -240,27 +227,26 @@ export default function AdminRegistrationsPage() {
     return (
         <main className="registrations-page">
             <header className="registrations-header">
-                <div>
-                    <NavLink
-                        className="registrations-header__back"
-                        to="/admin"
-                    >
-                        ← Admin
-                    </NavLink>
-
+                <div className="registrations-header__title">
                     <p className="registrations-header__label">
                         Administration
                     </p>
 
-                    <h1>Registrations</h1>
+                    <h1>Registrierungen</h1>
                 </div>
 
-                <div className="registrations-header__count">
-                    {registrations.totalItems}
-                    <span> registrations</span>
+                <div className="registrations-header__right">
+                    <div className="registrations-header__count">
+                        <strong>{registrations.totalItems}</strong>
+                        <span>
+                            {registrations.totalItems === 1
+                                ? " Registrierung"
+                                : " Registrierungen"}
+                        </span>
+                    </div>
+                    <AdminNavigation/>
                 </div>
             </header>
-
             <RegistrationFilters
                 name={nameInput}
                 date={dateInput}
