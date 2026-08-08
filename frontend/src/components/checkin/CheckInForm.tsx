@@ -6,6 +6,7 @@ import SlotInfo from "./SlotInfo.tsx"
 import {Button} from "../ui/Button.tsx"
 import {FormField} from "../ui/FormField.tsx"
 import {Checkbox} from "../ui/Checkbox.tsx"
+import {useNavigate} from "react-router-dom";
 
 const emptyForm: CheckInFormData = {
     firstName: "",
@@ -22,6 +23,7 @@ type Props = {
 
 function CheckInForm({slot, onSuccess}: Props) {
     const [form, setForm] = useState<CheckInFormData>(emptyForm)
+    const navigate = useNavigate()
 
     const mutation = useMutation({
         mutationFn: () => postCheckIn(slot.room!, slot.id ?? null, form),
@@ -38,6 +40,18 @@ function CheckInForm({slot, onSuccess}: Props) {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="flex items-center gap-3 mb-6">
+                <button
+                    onClick={() => navigate("/")}
+                    aria-label="Zurück"
+                    className="text-[--color-text-secondary] hover:text-[--color-text] transition-colors"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <h1 className="text-2xl font-bold">Zurück</h1>
+            </div>
             <SlotInfo slot={slot}/>
 
             <div className="flex gap-3">

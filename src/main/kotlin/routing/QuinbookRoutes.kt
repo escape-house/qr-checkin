@@ -9,7 +9,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeParseException
 
 fun Route.quinbookRoutes(
@@ -49,6 +48,13 @@ fun Route.quinbookRoutes(
                 return@get
             }
             call.respond(status = HttpStatusCode.OK, message = PrivacyCheckinSlotDto.fromSlot(slot))
+        }
+        get("/rooms") {
+            val rooms = quinbookService.getSlotsOfToday()
+                .mapNotNull { it.room.name }
+                .distinct()
+                .sorted()
+            call.respond(rooms)
         }
         get("/token") {
             call.respond(quinbookAuth.getBearerToken())

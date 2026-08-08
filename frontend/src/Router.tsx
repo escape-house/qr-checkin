@@ -1,8 +1,13 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import CheckInPage from "./routes/CheckInPage.tsx";
 import CheckInDetailPage from "./routes/CheckInDetailPage.tsx";
 import AllRoomsPage from "./routes/AllRoomsPage.tsx";
 import RoomCheckInPage from "./routes/RoomCheckInPage.tsx";
+import AdminLoginPage from "./routes/admin/AdminLoginPage.tsx";
+import AdminLayout from "./routes/admin/AdminLayout.tsx";
+import AdminTimetablePage from "./routes/admin/AdminTimetablePage.tsx";
+import AdminManageCheckInsPage from "./routes/admin/AdminManageCheckInsPage.tsx";
+import {AdminProtectedRoute} from "./components/AdminProtectedRoute.tsx";
 
 function Router() {
 
@@ -14,6 +19,14 @@ function Router() {
                 <Route path="/checkin/:date/:slotId" element={<CheckInDetailPage />} />
                 <Route path="/rooms" element={<AllRoomsPage />} />
                 <Route path="/rooms/:roomName" element={<RoomCheckInPage />} />
+                <Route path="/admin/login" element={<AdminLoginPage />} />
+                <Route element={<AdminProtectedRoute />}>
+                    <Route element={<AdminLayout />}>
+                        <Route path="/admin" element={<Navigate to="/admin/timetable" replace />} />
+                        <Route path="/admin/timetable" element={<AdminTimetablePage />} />
+                        <Route path="/admin/checkins" element={<AdminManageCheckInsPage />} />
+                    </Route>
+                </Route>
                 {/*
                 <Route path="/checkin/" element={<CheckInDetailPage />} />
                 <Route
