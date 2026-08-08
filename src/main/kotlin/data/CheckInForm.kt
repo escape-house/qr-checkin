@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class CheckInForm(
     val firstName: String,
     val lastName: String,
-    val email: String,
+    val email: String?,
     val agreesToTermsAndCondition: Boolean,
     val wantsPhotosOnline: Boolean,
 )

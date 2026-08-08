@@ -16,6 +16,15 @@ application {
 kotlin {
     jvmToolchain(21)
 }
+
+ktor {
+    openApi {
+        enabled = true
+        codeInferenceEnabled = true
+        onlyCommented = false
+    }
+}
+
 dependencies {
     implementation(ktorLibs.server.config.yaml)
     implementation(ktorLibs.server.core)
@@ -25,15 +34,20 @@ dependencies {
     implementation(ktorLibs.server.di)
     implementation(ktorLibs.server.netty)
     implementation(libs.logback.classic)
-    implementation("io.ktor:ktor-server-content-negotiation:3.5.0")
-    implementation("io.ktor:ktor-client-content-negotiation:3.5.0")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.0")
-    implementation("io.ktor:ktor-server-cors:3.5.0")
-    implementation("io.ktor:ktor-server-auth:3.5.0")
-    implementation("io.ktor:ktor-server-sessions:3.5.0")
-    // MongoDB
+
+    implementation("io.ktor:ktor-server-content-negotiation:3.5.2")
+    implementation("io.ktor:ktor-client-content-negotiation:3.5.2")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.2")
+    implementation("io.ktor:ktor-server-cors:3.5.2")
+    implementation("io.ktor:ktor-server-auth:3.5.2")
+    implementation("io.ktor:ktor-server-sessions:3.5.2")
+
+    implementation("io.ktor:ktor-server-openapi:3.5.2")
+    implementation("io.ktor:ktor-server-routing-openapi:3.5.2")
+
     implementation("org.mongodb:mongodb-driver-kotlin-coroutine:5.9.0")
-    implementation("io.ktor:ktor-server-status-pages:3.5.0")
+
+    implementation("io.ktor:ktor-server-status-pages:3.5.2")
 
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)

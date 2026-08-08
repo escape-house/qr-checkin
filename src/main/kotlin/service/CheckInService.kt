@@ -16,23 +16,11 @@ class CheckInService(
         val normalizedRoomName = roomName.trim()
         val normalizedFirstName = checkInForm.firstName.trim()
         val normalizedLastName = checkInForm.lastName.trim()
-        val normalizedEmail = checkInForm.email.trim()
+        val normalizedEmail = checkInForm.email?.trim()
 
-        require(normalizedRoomName.isNotEmpty()) {
-            "Room name must not be empty"
-        }
-
-        require(normalizedFirstName.isNotEmpty()) {
-            "First name must not be empty"
-        }
-
-        require(normalizedLastName.isNotEmpty()) {
-            "Last name must not be empty"
-        }
-
-        require(normalizedEmail.isNotEmpty()) {
-            "Email must not be empty"
-        }
+        require(normalizedRoomName.isNotEmpty()) { "Room name must not be empty" }
+        require(normalizedFirstName.isNotEmpty()) { "First name must not be empty" }
+        require(normalizedLastName.isNotEmpty()) { "Last name must not be empty" }
 
         require(checkInForm.agreesToTermsAndCondition) {
             "Terms and conditions must be accepted"

@@ -1,10 +1,8 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import SlotsPage from "./pages/SlotsPage.tsx";
-import Checkin from "./pages/Checkin.tsx";
-import AdminProtectedRoute from "./admin/AdminProtectedRoute.tsx";
-import AdminRegistrationsPage from "./pages/AdminRegistrationPage.tsx";
-import AdminPage from "./pages/AdminPage.tsx";
-import AdminDashboardPage from "./pages/AdminDashboardPage.tsx";
+import CheckInPage from "./routes/CheckInPage.tsx";
+import CheckInDetailPage from "./routes/CheckInDetailPage.tsx";
+import AllRoomsPage from "./routes/AllRoomsPage.tsx";
+import RoomCheckInPage from "./routes/RoomCheckInPage.tsx";
 
 function Router() {
 
@@ -12,14 +10,16 @@ function Router() {
         <>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<SlotsPage />} />
-                <Route path="/checkin/:slotId" element={<Checkin />} />
-                <Route path="/checkin/" element={<Checkin />} />
+                <Route path="/" element={<CheckInPage />} />
+                <Route path="/checkin/:date/:slotId" element={<CheckInDetailPage />} />
+                <Route path="/rooms" element={<AllRoomsPage />} />
+                <Route path="/rooms/:roomName" element={<RoomCheckInPage />} />
+                {/*
+                <Route path="/checkin/" element={<CheckInDetailPage />} />
                 <Route
                     path="/admin"
                     element={<AdminPage />}
                 />
-
                 <Route element={<AdminProtectedRoute />}>
                     <Route
                         path="/admin/dashboard"
@@ -30,6 +30,7 @@ function Router() {
                         element={<AdminRegistrationsPage />}
                     />
                 </Route>
+                -*/}
             </Routes>
         </BrowserRouter>
         </>
