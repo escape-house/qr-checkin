@@ -45,7 +45,7 @@ function RoomCheckInPage() {
                     className="w-full rounded-[--radius-lg] mb-4 object-cover max-h-48"
                 />
                 <div className="font-semibold text-xl mb-1">{room}</div>
-                <p className="text-xl font-semibold text-[--color-success] mt-4">Erfolgreich eingecheckt!</p>
+                <p className="text-xl font-semibold text-success mt-4">Erfolgreich eingecheckt!</p>
                 <Button onClick={() => setCheckedIn(false)} className="mt-4">
                     Weitere Person einchecken
                 </Button>
@@ -59,7 +59,7 @@ function RoomCheckInPage() {
                 <button
                     onClick={() => navigate("/rooms")}
                     aria-label="Zurück"
-                    className="text-[--color-text-secondary] hover:text-[--color-text] transition-colors"
+                    className="text-text-secondary hover:text-text transition-colors"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M19 12H5M12 5l-7 7 7 7"/>
@@ -109,10 +109,10 @@ function RoomCheckInPage() {
                     onChange={e => setForm(f => ({...f, agreesToTermsAndCondition: e.target.checked}))}
                 >
                     Ich stimme den{" "}
-                    <a href="/agb" target="_blank" rel="noreferrer" className="text-[--color-primary] underline">
+                    <a href="/agb" target="_blank" rel="noreferrer" className="text-primary underline">
                         Allgemeinen Geschäftsbedingungen
                     </a>{" "}
-                    zu. <span className="text-[--color-error]">*</span>
+                    zu. <span className="text-error">*</span>
                 </Checkbox>
 
                 <Checkbox
@@ -123,7 +123,7 @@ function RoomCheckInPage() {
                 </Checkbox>
 
                 {mutation.isError && (
-                    <p className="text-sm text-[--color-error]">Check-in fehlgeschlagen. Bitte versuche es erneut.</p>
+                    <p className="text-sm text-error">Check-in fehlgeschlagen. Bitte versuche es erneut.</p>
                 )}
 
                 <Button type="submit" disabled={!canSubmit || mutation.isPending} fullWidth>

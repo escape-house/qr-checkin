@@ -6,7 +6,8 @@ import at.escapehouse.data.DeclarationOfConsent
 import at.escapehouse.repository.CheckInRepository
 
 class CheckInService(
-    private val checkInRepository: CheckInRepository
+    private val checkInRepository: CheckInRepository,
+    private val dashboardBroadcaster: DashboardBroadcaster,
 ) {
     suspend fun checkIn(
         checkInForm: CheckInForm,
@@ -39,6 +40,7 @@ class CheckInService(
         )
 
         checkInRepository.insertOne(declaration)
+        dashboardBroadcaster.broadcast()
 
         return CheckInResponse(
             success = true,

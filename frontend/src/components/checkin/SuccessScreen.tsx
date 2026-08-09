@@ -11,7 +11,7 @@ function SuccessScreen({slot, onCheckInAnother}: Props) {
     return (
         <div className="text-center">
             <SlotInfo slot={slot}/>
-            <p className="text-xl font-semibold text-[--color-success]">Erfolgreich eingecheckt!</p>
+            <p className="text-xl font-semibold text-success">Erfolgreich eingecheckt!</p>
             <Button onClick={onCheckInAnother} className="mt-4">
                 Weitere Person einchecken
             </Button>

@@ -22,7 +22,8 @@ interface CheckInRepository {
         pageSize: Int,
         name: String?,
         date: LocalDate?,
-        slotId: Long?
+        slotId: Long?,
+        room: String?,
     ): RegistrationPageResult
 
     suspend fun updateRegistration(

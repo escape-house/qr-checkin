@@ -728,7 +728,7 @@
 };
             defs["AdminRegistrationDto"] = {
   "title" : "AdminRegistrationDto",
-  "required" : [ "agreesToTermsAndCondition", "email", "firstName", "id", "lastName", "registrationDate", "roomName", "slotId", "wantsPhotosOnline" ],
+  "required" : [ "agreesToTermsAndCondition", "firstName", "id", "lastName", "registrationDate", "roomName", "slotId", "wantsPhotosOnline" ],
   "properties" : {
     "id" : { },
     "firstName" : { },
@@ -760,7 +760,7 @@
 };
             defs["AdminRegistrationUpdateRequest"] = {
   "title" : "AdminRegistrationUpdateRequest",
-  "required" : [ "agreesToTermsAndCondition", "email", "firstName", "lastName", "roomName", "slotId", "wantsPhotosOnline" ],
+  "required" : [ "agreesToTermsAndCondition", "firstName", "lastName", "roomName", "slotId", "wantsPhotosOnline" ],
   "properties" : {
     "firstName" : { },
     "lastName" : { },
@@ -871,6 +871,9 @@
                     <li data-group="Default" data-name="apiAdminDashboardGet" class="">
                       <a href="#api-Default-apiAdminDashboardGet">apiAdminDashboardGet</a>
                     </li>
+                    <li data-group="Default" data-name="apiAdminDashboardWsGet" class="">
+                      <a href="#api-Default-apiAdminDashboardWsGet">apiAdminDashboardWsGet</a>
+                    </li>
                     <li data-group="Default" data-name="apiAdminRegistrationsGet" class="">
                       <a href="#api-Default-apiAdminRegistrationsGet">apiAdminRegistrationsGet</a>
                     </li>
@@ -966,7 +969,7 @@
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 \
 -H "Accept: application/json"\
-"//api/admin/dashboard?"</code></pre>
+"//api/admin/dashboard?date="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-apiAdminDashboardGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -989,8 +992,9 @@ public class DefaultApiExample {
         //admin-session.setApiKeyPrefix("Token");
 
         DefaultApi apiInstance = new DefaultApi();
+         date = ; //  | 
         try {
-            apiInstance.apiAdminDashboardGet();
+            apiInstance.apiAdminDashboardGet(date);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#apiAdminDashboardGet");
             e.printStackTrace();
@@ -1006,8 +1010,9 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
+         date = ; //  | 
         try {
-            apiInstance.apiAdminDashboardGet();
+            apiInstance.apiAdminDashboardGet(date);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#apiAdminDashboardGet");
             e.printStackTrace();
@@ -1025,11 +1030,12 @@ public class DefaultApiExample {
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"admin_session"];
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"admin_session"];
+ *date = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
-[apiInstance apiAdminDashboardGetWithCompletionHandler: 
-              ^(NSError* error) {
+[apiInstance apiAdminDashboardGetWith:date
+              completionHandler: ^(NSError* error) {
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -1048,6 +1054,9 @@ admin-session.apiKey = "YOUR API KEY"
 //admin-session.apiKeyPrefix['admin_session'] = "Token"
 
 var api = new QrCheckinApi.DefaultApi()
+var opts = { 
+  'date':  // {{}} 
+};
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -1055,7 +1064,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.apiAdminDashboardGet(callback);
+api.apiAdminDashboardGet(opts, callback);
 </code></pre>
                             </div>
 
@@ -1082,10 +1091,11 @@ namespace Example
             // Configuration.Default.ApiKeyPrefix.Add("admin_session", "Bearer");
 
             var apiInstance = new DefaultApi();
+            var date = new (); //  |  (optional) 
 
             try
             {
-                apiInstance.apiAdminDashboardGet();
+                apiInstance.apiAdminDashboardGet(date);
             }
             catch (Exception e)
             {
@@ -1107,9 +1117,10 @@ Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('admin_sessio
 // Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('admin_session', 'Bearer');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
+$date = ; //  | 
 
 try {
-    $api_instance->apiAdminDashboardGet();
+    $api_instance->apiAdminDashboardGet($date);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->apiAdminDashboardGet: ', $e->getMessage(), PHP_EOL;
 }
@@ -1127,9 +1138,10 @@ $WWW::SwaggerClient::Configuration::api_key->{'admin_session'} = 'YOUR_API_KEY';
 #$WWW::SwaggerClient::Configuration::api_key_prefix->{'admin_session'} = "Bearer";
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $date = ; #  | 
 
 eval { 
-    $api_instance->apiAdminDashboardGet();
+    $api_instance->apiAdminDashboardGet(date => $date);
 };
 if ($@) {
     warn "Exception when calling DefaultApi->apiAdminDashboardGet: $@\n";
@@ -1150,9 +1162,10 @@ swagger_client.configuration.api_key['admin_session'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
+date =  #  |  (optional)
 
 try: 
-    api_instance.api_admin_dashboard_get()
+    api_instance.api_admin_dashboard_get(date=date)
 except ApiException as e:
     print("Exception when calling DefaultApi->apiAdminDashboardGet: %s\n" % e)</code></pre>
                             </div>
@@ -1170,6 +1183,22 @@ except ApiException as e:
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
+                                <tr><td style="width:150px;">date</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_apiAdminDashboardGet_date">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    
+                                                </span>
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
                             </table>
 
                           <h2>Responses</h2>
@@ -1227,6 +1256,308 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
+                    <div id="api-Default-apiAdminDashboardWsGet">
+                      <article id="api-Default-apiAdminDashboardWsGet-0" data-group="User" data-name="apiAdminDashboardWsGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>apiAdminDashboardWsGet</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/admin/dashboard/ws</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-apiAdminDashboardWsGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-apiAdminDashboardWsGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-apiAdminDashboardWsGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+\
+"//api/admin/dashboard/ws?"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        // Configure API key authorization: admin-session
+        ApiKeyAuth admin-session = (ApiKeyAuth) defaultClient.getAuthentication("admin-session");
+        admin-session.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //admin-session.setApiKeyPrefix("Token");
+
+        DefaultApi apiInstance = new DefaultApi();
+         connection = ; //  | 
+         upgrade = ; //  | 
+        try {
+            apiInstance.apiAdminDashboardWsGet(connection, upgrade);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#apiAdminDashboardWsGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+         connection = ; //  | 
+         upgrade = ; //  | 
+        try {
+            apiInstance.apiAdminDashboardWsGet(connection, upgrade);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#apiAdminDashboardWsGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+// Configure API key authorization: (authentication scheme: admin-session)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"admin_session"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"admin_session"];
+ *connection = ; //  (optional)
+ *upgrade = ; //  (optional)
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+[apiInstance apiAdminDashboardWsGetWith:connection
+    upgrade:upgrade
+              completionHandler: ^(NSError* error) {
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var QrCheckinApi = require('qr_checkin_api');
+var defaultClient = QrCheckinApi.ApiClient.instance;
+
+// Configure API key authorization: admin-session
+var admin-session = defaultClient.authentications['admin-session'];
+admin-session.apiKey = "YOUR API KEY"
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//admin-session.apiKeyPrefix['admin_session'] = "Token"
+
+var api = new QrCheckinApi.DefaultApi()
+var opts = { 
+  'connection': , // {{}} 
+  'upgrade':  // {{}} 
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.apiAdminDashboardWsGet(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class apiAdminDashboardWsGetExample
+    {
+        public void main()
+        {
+
+            // Configure API key authorization: admin-session
+            Configuration.Default.ApiKey.Add("admin_session", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("admin_session", "Bearer");
+
+            var apiInstance = new DefaultApi();
+            var connection = new (); //  |  (optional) 
+            var upgrade = new (); //  |  (optional) 
+
+            try
+            {
+                apiInstance.apiAdminDashboardWsGet(connection, upgrade);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.apiAdminDashboardWsGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: admin-session
+Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('admin_session', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('admin_session', 'Bearer');
+
+$api_instance = new Swagger\Client\ApiDefaultApi();
+$connection = ; //  | 
+$upgrade = ; //  | 
+
+try {
+    $api_instance->apiAdminDashboardWsGet($connection, $upgrade);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->apiAdminDashboardWsGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::DefaultApi;
+
+# Configure API key authorization: admin-session
+$WWW::SwaggerClient::Configuration::api_key->{'admin_session'} = 'YOUR_API_KEY';
+# uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$WWW::SwaggerClient::Configuration::api_key_prefix->{'admin_session'} = "Bearer";
+
+my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $connection = ; #  | 
+my $upgrade = ; #  | 
+
+eval { 
+    $api_instance->apiAdminDashboardWsGet(connection => $connection, upgrade => $upgrade);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->apiAdminDashboardWsGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-apiAdminDashboardWsGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: admin-session
+swagger_client.configuration.api_key['admin_session'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# swagger_client.configuration.api_key_prefix['admin_session'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+connection =  #  |  (optional)
+upgrade =  #  |  (optional)
+
+try: 
+    api_instance.api_admin_dashboard_ws_get(connection=connection, upgrade=upgrade)
+except ApiException as e:
+    print("Exception when calling DefaultApi->apiAdminDashboardWsGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+                            <div class="methodsubtabletitle">Header parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                  <tr><td style="width:150px;">Connection</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_apiAdminDashboardWsGet_connection">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      
+                                                  </span>
+                                  
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                                  <tr><td style="width:150px;">Upgrade</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_apiAdminDashboardWsGet_upgrade">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      
+                                                  </span>
+                                  
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                            </table>
+
+                          <h2>Responses</h2>
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Default-apiAdminRegistrationsGet">
                       <article id="api-Default-apiAdminRegistrationsGet-0" data-group="User" data-name="apiAdminRegistrationsGet" data-version="0">
                         <div class="pull-left">
@@ -1262,7 +1593,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 \
 -H "Accept: application/json"\
-"//api/admin/registrations?page=&pageSize=&name=&date="</code></pre>
+"//api/admin/registrations?page=&pageSize=&name=&date=&slotId=&room="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Default-apiAdminRegistrationsGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1289,8 +1620,10 @@ public class DefaultApiExample {
          pageSize = ; //  | 
          name = ; //  | 
          date = ; //  | 
+         slotId = ; //  | 
+         room = ; //  | 
         try {
-            AdminRegistrationPageResponse result = apiInstance.apiAdminRegistrationsGet(page, pageSize, name, date);
+            AdminRegistrationPageResponse result = apiInstance.apiAdminRegistrationsGet(page, pageSize, name, date, slotId, room);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#apiAdminRegistrationsGet");
@@ -1311,8 +1644,10 @@ public class DefaultApiExample {
          pageSize = ; //  | 
          name = ; //  | 
          date = ; //  | 
+         slotId = ; //  | 
+         room = ; //  | 
         try {
-            AdminRegistrationPageResponse result = apiInstance.apiAdminRegistrationsGet(page, pageSize, name, date);
+            AdminRegistrationPageResponse result = apiInstance.apiAdminRegistrationsGet(page, pageSize, name, date, slotId, room);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#apiAdminRegistrationsGet");
@@ -1335,6 +1670,8 @@ public class DefaultApiExample {
  *pageSize = ; //  (optional)
  *name = ; //  (optional)
  *date = ; //  (optional)
+ *slotId = ; //  (optional)
+ *room = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -1342,6 +1679,8 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
     pageSize:pageSize
     name:name
     date:date
+    slotId:slotId
+    room:room
               completionHandler: ^(AdminRegistrationPageResponse output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -1368,7 +1707,9 @@ var opts = {
   'page': , // {{}} 
   'pageSize': , // {{}} 
   'name': , // {{}} 
-  'date':  // {{}} 
+  'date': , // {{}} 
+  'slotId': , // {{}} 
+  'room':  // {{}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -1408,10 +1749,12 @@ namespace Example
             var pageSize = new (); //  |  (optional) 
             var name = new (); //  |  (optional) 
             var date = new (); //  |  (optional) 
+            var slotId = new (); //  |  (optional) 
+            var room = new (); //  |  (optional) 
 
             try
             {
-                AdminRegistrationPageResponse result = apiInstance.apiAdminRegistrationsGet(page, pageSize, name, date);
+                AdminRegistrationPageResponse result = apiInstance.apiAdminRegistrationsGet(page, pageSize, name, date, slotId, room);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1438,9 +1781,11 @@ $page = ; //  |
 $pageSize = ; //  | 
 $name = ; //  | 
 $date = ; //  | 
+$slotId = ; //  | 
+$room = ; //  | 
 
 try {
-    $result = $api_instance->apiAdminRegistrationsGet($page, $pageSize, $name, $date);
+    $result = $api_instance->apiAdminRegistrationsGet($page, $pageSize, $name, $date, $slotId, $room);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->apiAdminRegistrationsGet: ', $e->getMessage(), PHP_EOL;
@@ -1463,9 +1808,11 @@ my $page = ; #  |
 my $pageSize = ; #  | 
 my $name = ; #  | 
 my $date = ; #  | 
+my $slotId = ; #  | 
+my $room = ; #  | 
 
 eval { 
-    my $result = $api_instance->apiAdminRegistrationsGet(page => $page, pageSize => $pageSize, name => $name, date => $date);
+    my $result = $api_instance->apiAdminRegistrationsGet(page => $page, pageSize => $pageSize, name => $name, date => $date, slotId => $slotId, room => $room);
     print Dumper($result);
 };
 if ($@) {
@@ -1491,9 +1838,11 @@ page =  #  |  (optional)
 pageSize =  #  |  (optional)
 name =  #  |  (optional)
 date =  #  |  (optional)
+slotId =  #  |  (optional)
+room =  #  |  (optional)
 
 try: 
-    api_response = api_instance.api_admin_registrations_get(page=page, pageSize=pageSize, name=name, date=date)
+    api_response = api_instance.api_admin_registrations_get(page=page, pageSize=pageSize, name=name, date=date, slotId=slotId, room=room)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DefaultApi->apiAdminRegistrationsGet: %s\n" % e)</code></pre>
@@ -1565,6 +1914,38 @@ except ApiException as e:
                                 
                                 
                                     <div id="d2e199_apiAdminRegistrationsGet_date">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    
+                                                </span>
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">slotId</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_apiAdminRegistrationsGet_slotId">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    
+                                                </span>
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">room</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_apiAdminRegistrationsGet_room">
                                         <div class="json-schema-view">
                                             <div class="primitive">
                                                 <span class="type">

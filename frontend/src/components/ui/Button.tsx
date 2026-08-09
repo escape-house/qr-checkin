@@ -9,11 +9,11 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variantClasses: Record<Variant, string> = {
     primary:
-        "bg-[--color-primary] text-white hover:bg-[--color-primary-hover] disabled:bg-[--color-primary-disabled] disabled:cursor-not-allowed",
+        "bg-primary text-white hover:bg-primary-hover disabled:bg-primary-disabled disabled:cursor-not-allowed",
     secondary:
-        "bg-[--color-surface] text-[--color-text] border border-[--color-border] hover:border-[--color-primary] disabled:opacity-50 disabled:cursor-not-allowed",
+        "bg-white text-text border border-border hover:border-primary hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed",
     ghost:
-        "bg-transparent text-[--color-primary] hover:underline disabled:opacity-50 disabled:cursor-not-allowed",
+        "bg-transparent text-primary hover:underline disabled:opacity-50 disabled:cursor-not-allowed",
 }
 
 export function Button({ variant = "primary", fullWidth = false, className = "", children, ...props }: Props) {

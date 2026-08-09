@@ -7,6 +7,7 @@ import at.escapehouse.routes.adminRegistrationRoutes
 import at.escapehouse.routes.quinbookRoutes
 import at.escapehouse.service.AdminRegistrationService
 import at.escapehouse.service.CheckInService
+import at.escapehouse.service.DashboardBroadcaster
 import at.escapehouse.service.QuinbookAuth
 import at.escapehouse.service.QuinbookService
 import io.ktor.openapi.OpenApiInfo
@@ -26,7 +27,8 @@ fun Application.configureRouting(
     quinbookAuth: QuinbookAuth,
     checkInService: CheckInService,
     adminRegistrationService: AdminRegistrationService,
-    checkInRepository: CheckInRepository
+    checkInRepository: CheckInRepository,
+    dashboardBroadcaster: DashboardBroadcaster,
 ) {
     routing {
         route("/api"){
@@ -34,7 +36,7 @@ fun Application.configureRouting(
             checkInRoutes(checkInService)
             authenticate("admin-session") {
                 adminRegistrationRoutes(adminRegistrationService)
-                adminDashBoardRoutes(quinbookService, checkInRepository)
+                adminDashBoardRoutes(quinbookService, checkInRepository, dashboardBroadcaster)
             }
         }
         openAPI(path = "openapi") {

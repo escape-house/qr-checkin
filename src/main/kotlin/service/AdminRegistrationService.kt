@@ -17,7 +17,8 @@ class AdminRegistrationService(
         pageSize: Int,
         name: String?,
         date: LocalDate?,
-        slotId: Long? = null
+        slotId: Long? = null,
+        room: String? = null,
     ): AdminRegistrationPageResponse {
         require(page >= 0) {
             "Page must not be negative"
@@ -32,7 +33,8 @@ class AdminRegistrationService(
             pageSize = pageSize,
             name = name,
             date = date,
-            slotId = slotId
+            slotId = slotId,
+            room = room,
         )
 
         val totalPages =
@@ -96,7 +98,7 @@ class AdminRegistrationService(
             lastName.trim()
 
         val normalizedEmail =
-            email.trim().lowercase()
+            email?.trim()?.lowercase()?.takeIf { it.isNotEmpty() }
 
         val normalizedRoomName =
             roomName.trim()
@@ -109,11 +111,7 @@ class AdminRegistrationService(
             "Last name must not be empty"
         }
 
-        require(normalizedEmail.isNotEmpty()) {
-            "Email must not be empty"
-        }
-
-        require('@' in normalizedEmail) {
+        require(normalizedEmail == null || '@' in normalizedEmail) {
             "Invalid email address"
         }
 
@@ -139,7 +137,7 @@ private fun DeclarationOfConsent.toAdminDto() =
         id = id,
         firstName = firstName,
         lastName = lastName,
-        email = email?:"",
+        email = email?.takeIf { it.isNotEmpty() },
         roomName = roomName,
         slotId = slotId?:-1,
         registrationDate = createdAt,

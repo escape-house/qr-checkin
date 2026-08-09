@@ -10,9 +10,9 @@ export function Checkbox({ children, className = "", ...props }: Props) {
             <input
                 type="checkbox"
                 {...props}
-                className="mt-0.5 size-4 shrink-0 accent-[--color-primary] cursor-pointer"
+                className="mt-0.5 size-4 shrink-0 accent-primary cursor-pointer"
             />
-            <span className="text-sm text-[--color-text]">{children}</span>
+            <span className="text-sm text-text">{children}</span>
         </label>
     )
 }

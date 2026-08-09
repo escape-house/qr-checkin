@@ -12,7 +12,7 @@ export function AdminProtectedRoute() {
 
     if (isPending) {
         return (
-            <div className="flex items-center justify-center min-h-screen text-[--color-muted]">
+            <div className="flex items-center justify-center min-h-screen text-muted">
                 Lade…
             </div>
         )

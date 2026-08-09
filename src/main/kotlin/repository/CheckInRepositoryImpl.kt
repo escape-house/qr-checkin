@@ -51,12 +51,14 @@ class MongoCheckInRepositoryImpl(
         pageSize: Int,
         name: String?,
         date: LocalDate?,
-        slotId: Long?
+        slotId: Long?,
+        room: String?,
     ): RegistrationPageResult {
         val filter = createRegistrationFilter(
             name = name,
             date = date,
-            slotId
+            slotId = slotId,
+            room = room,
         )
 
         val totalItems =
@@ -145,7 +147,8 @@ class MongoCheckInRepositoryImpl(
     private fun createRegistrationFilter(
         name: String?,
         date: LocalDate?,
-        slotId: Long?
+        slotId: Long?,
+        room: String?,
     ): Bson {
         val filters = mutableListOf<Bson>()
 
@@ -154,10 +157,6 @@ class MongoCheckInRepositoryImpl(
             ?.takeIf(String::isNotEmpty)
 
         if (normalizedName != null) {
-            /*
-             * Splitting enables searches such as:
-             * "Max Mustermann"
-             */
             val nameParts = normalizedName
                 .split(Regex("\\s+"))
 
@@ -168,38 +167,28 @@ class MongoCheckInRepositoryImpl(
                 )
 
                 filters += Filters.or(
-                    Filters.regex(
-                        "firstName",
-                        pattern,
-                    ),
-                    Filters.regex(
-                        "lastName",
-                        pattern,
-                    ),
+                    Filters.regex("firstName", pattern),
+                    Filters.regex("lastName", pattern),
                 )
             }
         }
 
         if (date != null) {
-            val dayStart =
-                date.atStartOfDay()
+            val dayStart = date.atStartOfDay()
+            val nextDayStart = date.plusDays(1).atStartOfDay()
 
-            val nextDayStart =
-                date.plusDays(1).atStartOfDay()
+            filters += Filters.gte("createdAt", dayStart)
+            filters += Filters.lt("createdAt", nextDayStart)
+        }
 
-            filters += Filters.and(
-                Filters.gte(
-                    "createdAt",
-                    dayStart,
-                ),
-                Filters.lt(
-                    "createdAt",
-                    nextDayStart,
-                ),
-                Filters.eq(
-                    "slotId",
-                    slotId
-                )
+        if (slotId != null) {
+            filters += Filters.eq("slotId", slotId)
+        }
+
+        if (room != null) {
+            filters += Filters.regex(
+                "roomName",
+                Pattern.compile(Pattern.quote(room), Pattern.CASE_INSENSITIVE),
             )
         }
 

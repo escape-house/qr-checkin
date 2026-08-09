@@ -48,6 +48,7 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-kotlin-coroutine:5.9.0")
 
     implementation("io.ktor:ktor-server-status-pages:3.5.2")
+    implementation("io.ktor:ktor-server-websockets:3.5.2")
 
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)

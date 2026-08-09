@@ -4,6 +4,7 @@ ktor:
 
   application:
     modules:
+      - at.escapehouse.MainKt.configureWebSockets
       - at.escapehouse.auth.AdminAuthKt.configureAdminAuth
       - at.escapehouse.routing.RoutingKt.configureRouting
       - at.escapehouse.MainKt.configureSerialization
@@ -18,6 +19,7 @@ ktor:
       - at.escapehouse.repository.MongoCheckInRepositoryImpl
       - at.escapehouse.service.QuinbookService
       - at.escapehouse.service.QuinbookAuth
+      - at.escapehouse.service.DashboardBroadcaster
       - at.escapehouse.service.CheckInService
       - at.escapehouse.service.AdminRegistrationService
 

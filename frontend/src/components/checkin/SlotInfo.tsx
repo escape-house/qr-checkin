@@ -16,12 +16,12 @@ function SlotInfo({slot}: Props) {
                 />
             )}
             <div className="font-semibold text-xl">{slot.displayDate}</div>
-            {slot.room && <div className="text-[--color-text-secondary] mt-1">{slot.room}</div>}
+            {slot.room && <div className="text-text-secondary mt-1">{slot.room}</div>}
             {SlotUtils.getSlotDisplayName(slot) && (
                 <div className="mt-1">{SlotUtils.getSlotDisplayName(slot)}</div>
             )}
             {slot.players != null && (
-                <div className="text-[--color-muted] mt-1">{slot.players} Personen</div>
+                <div className="text-muted mt-1">{slot.players} Personen</div>
             )}
         </div>
     )

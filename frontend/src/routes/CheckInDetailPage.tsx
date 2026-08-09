@@ -21,8 +21,8 @@ function CheckInDetailPage() {
 
     const [checkedIn, setCheckedIn] = useState(false)
 
-    if (!slotFromState && isPending) return <p className="text-[--color-text-secondary] p-4">Lade Slot…</p>
-    if (!slotFromState && isError) return <p className="text-[--color-error] p-4">Fehler beim Laden des Slots.</p>
+    if (!slotFromState && isPending) return <p className="text-text-secondary p-4">Lade Slot…</p>
+    if (!slotFromState && isError) return <p className="text-error p-4">Fehler beim Laden des Slots.</p>
     if (!slot) return null
 
     return (

@@ -13,9 +13,9 @@ function CheckInPage() {
         queryFn: fetchCheckInSlots,
     })
 
-    if (isPending) return <p className="text-[--color-text-secondary] p-4">Lade Slots…</p>
-    if (isError) return <p className="text-[--color-error] p-4">Fehler beim Laden der Slots.</p>
-    if (slots.length === 0) return <p className="text-[--color-text-secondary] p-4">Keine aktiven Slots.</p>
+    if (isPending) return <p className="text-text-secondary p-4">Lade Slots…</p>
+    if (isError) return <p className="text-error p-4">Fehler beim Laden der Slots.</p>
+    if (slots.length === 0) return <p className="text-text-secondary p-4">Keine aktiven Slots.</p>
 
     return (
         <div className="max-w-lg mx-auto px-4 py-6 flex flex-col min-h-screen">
@@ -42,9 +42,9 @@ function CheckInPage() {
                 }
             </div>
 
-            <footer className="mt-8 pt-4 border-t border-[--color-border] flex justify-between text-sm text-[--color-muted]">
-                <Link to="/agb" className="hover:text-[--color-text] transition-colors">AGB</Link>
-                <Link to="/rooms" className="hover:text-[--color-primary] transition-colors">Raum nicht dabei?</Link>
+            <footer className="mt-8 pt-4 border-t border-border flex justify-between text-sm text-muted">
+                <Link to="/agb" className="hover:text-text transition-colors">AGB</Link>
+                <Link to="/rooms" className="hover:text-primary transition-colors">Raum nicht dabei?</Link>
             </footer>
         </div>
     )

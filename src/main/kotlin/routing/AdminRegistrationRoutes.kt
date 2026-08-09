@@ -50,11 +50,23 @@ fun Route.adminRegistrationRoutes(
                 }
             }
 
+            val slotId = call.request
+                .queryParameters["slotId"]
+                ?.trim()
+                ?.toLongOrNull()
+
+            val room = call.request
+                .queryParameters["room"]
+                ?.trim()
+                ?.takeIf(String::isNotEmpty)
+
             val response = service.getRegistrations(
                 page = page,
                 pageSize = pageSize,
                 name = name,
-                date = date
+                date = date,
+                slotId = slotId,
+                room = room,
             )
 
             call.respond(

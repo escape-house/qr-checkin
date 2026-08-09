@@ -44,7 +44,7 @@ function CheckInForm({slot, onSuccess}: Props) {
                 <button
                     onClick={() => navigate("/")}
                     aria-label="Zurück"
-                    className="text-[--color-text-secondary] hover:text-[--color-text] transition-colors"
+                    className="text-text-secondary hover:text-text transition-colors"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M19 12H5M12 5l-7 7 7 7"/>
@@ -85,10 +85,10 @@ function CheckInForm({slot, onSuccess}: Props) {
                 onChange={e => setForm(f => ({...f, agreesToTermsAndCondition: e.target.checked}))}
             >
                 Ich stimme den{" "}
-                <a href="/agb" target="_blank" rel="noreferrer" className="text-[--color-primary] underline">
+                <a href="/agb" target="_blank" rel="noreferrer" className="text-primary underline">
                     Allgemeinen Geschäftsbedingungen
                 </a>{" "}
-                zu. <span className="text-[--color-error]">*</span>
+                zu. <span className="text-error">*</span>
             </Checkbox>
 
             <Checkbox
@@ -99,7 +99,7 @@ function CheckInForm({slot, onSuccess}: Props) {
             </Checkbox>
 
             {mutation.isError && (
-                <p className="text-sm text-[--color-error]">Check-in fehlgeschlagen. Bitte versuche es erneut.</p>
+                <p className="text-sm text-error">Check-in fehlgeschlagen. Bitte versuche es erneut.</p>
             )}
 
             <Button type="submit" disabled={!canSubmit || mutation.isPending} fullWidth>

@@ -1,24 +1,52 @@
 @import "tailwindcss";
 
-@theme {
-  /* Brand colors */
+@theme inline {
+  /* Brand */
   --color-primary: #e63946;
   --color-primary-hover: #c1121f;
   --color-primary-disabled: #f4a0a6;
 
-  /* Neutral surface colors */
-  --color-bg: #0f0f14;
-  --color-surface: #1c1c26;
-  --color-border: #2e2e3e;
-  --color-muted: #6b7280;
-
-  /* Text */
-  --color-text: #f0f0f0;
-  --color-text-secondary: #a0a0b0;
+  /* Base (light theme) */
+  --color-bg: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-muted: #94a3b8;
+  --color-text: #1e293b;
+  --color-text-secondary: #64748b;
 
   /* Status */
-  --color-success: #2e7d32;
+  --color-success: #16a34a;
   --color-error: #ef4444;
+
+  /* Slot status: future (upcoming booking) */
+  --color-future-bg:     #e0f2fe;
+  --color-future-border: #7dd3fc;
+  --color-future-text:   #0c4a6e;
+  --color-future-accent: #0ea5e9;
+
+  /* Slot status: checkin (20 min window before start) */
+  --color-checkin-bg:     #fffbeb;
+  --color-checkin-border: #fcd34d;
+  --color-checkin-text:   #78350f;
+  --color-checkin-accent: #f59e0b;
+
+  /* Slot status: active (currently playing) */
+  --color-active-bg:     #f0fdf4;
+  --color-active-border: #86efac;
+  --color-active-text:   #14532d;
+  --color-active-accent: #22c55e;
+
+  /* Slot status: past (already done) */
+  --color-past-bg:     #f8fafc;
+  --color-past-border: #e2e8f0;
+  --color-past-text:   #94a3b8;
+  --color-past-accent: #cbd5e1;
+
+  /* Slot status: blocked */
+  --color-blocked-bg:     #f1f5f9;
+  --color-blocked-border: #cbd5e1;
+  --color-blocked-text:   #64748b;
+  --color-blocked-accent: #94a3b8;
 
   /* Radii */
   --radius-sm: 4px;

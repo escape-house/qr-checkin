@@ -28,7 +28,7 @@ function AdminPage() {
                 </Button>
             </div>
 
-            <p className="text-[--color-text-secondary]">Admin-Bereich. Weitere Funktionen folgen.</p>
+            <p className="text-text-secondary">Admin-Bereich. Weitere Funktionen folgen.</p>
         </div>
     )
 }

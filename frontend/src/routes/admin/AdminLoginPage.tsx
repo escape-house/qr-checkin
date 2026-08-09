@@ -28,7 +28,7 @@ function AdminLoginPage() {
     })
 
     if (sessionPending) {
-        return <div className="flex items-center justify-center min-h-screen text-[--color-muted]">Lade…</div>
+        return <div className="flex items-center justify-center min-h-screen text-muted">Lade…</div>
     }
 
     if (session?.authenticated) {
@@ -56,7 +56,7 @@ function AdminLoginPage() {
                     />
 
                     {mutation.isError && (
-                        <p className="text-sm text-[--color-error]">
+                        <p className="text-sm text-error">
                             {mutation.error instanceof Error ? mutation.error.message : "Login fehlgeschlagen."}
                         </p>
                     )}

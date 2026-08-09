@@ -16,7 +16,7 @@ function AllRoomsPage() {
                 <button
                     onClick={() => navigate("/")}
                     aria-label="Zurück"
-                    className="text-[--color-text-secondary] hover:text-[--color-text] transition-colors"
+                    className="text-text-secondary hover:text-text transition-colors"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -26,14 +26,14 @@ function AllRoomsPage() {
                 <h1 className="text-2xl font-bold">Checkin</h1>
             </div>
 
-            {isPending && <p className="text-[--color-text-secondary]">Lade Räume…</p>}
-            {isError && <p className="text-[--color-error]">Fehler beim Laden der Räume.</p>}
-            {rooms?.length === 0 && <p className="text-[--color-text-secondary]">Keine Räume heute.</p>}
+            {isPending && <p className="text-text-secondary">Lade Räume…</p>}
+            {isError && <p className="text-error">Fehler beim Laden der Räume.</p>}
+            {rooms?.length === 0 && <p className="text-text-secondary">Keine Räume heute.</p>}
 
             {rooms?.map(room => (
                 <div
                     key={room}
-                    className="border border-[--color-border] rounded-[--radius-lg] overflow-hidden mb-3 cursor-pointer bg-[--color-surface] hover:border-[--color-primary] transition-colors"
+                    className="border border-border rounded-[--radius-lg] overflow-hidden mb-3 cursor-pointer bg-surface hover:border-primary transition-colors"
 
                     onClick={() => navigate(`/rooms/${encodeURIComponent(room.replace(" ", "_"))}`)}
                 >

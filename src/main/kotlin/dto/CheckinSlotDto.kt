@@ -83,7 +83,7 @@ data class AdminCheckInSlot(
                 slot.start,
                 slot.end,
                 slot.players,
-                name = slot.customer?.firstName?.trim() + " " + slot.customer?.lastName?.trim(),
+                name = if(slot.customer!=null) slot.customer.firstName?.trim() + " " + slot.customer.lastName?.trim() else "",
                 slot.customer?.companyName?.trim(),
                 slot.room.name,
                 checkInRepository.findBySlotId(slot.id?:-1),

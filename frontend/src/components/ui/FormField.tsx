@@ -12,12 +12,12 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 export function FormField({ label, required = false, error, wrapperClassName, children, ...inputProps }: Props) {
     return (
         <div className={["flex flex-col gap-1", wrapperClassName].filter(Boolean).join(" ")}>
-            <label className="text-sm font-medium text-[--color-text]">
+            <label className="text-sm font-medium text-text">
                 {label}
-                {required && <span className="text-[--color-error] ml-1">*</span>}
+                {required && <span className="text-error ml-1">*</span>}
             </label>
             {children ?? <Input error={!!error} {...inputProps} />}
-            {error && <span className="text-xs text-[--color-error]">{error}</span>}
+            {error && <span className="text-xs text-error">{error}</span>}
         </div>
     )
 }

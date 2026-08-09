@@ -6,8 +6,10 @@ import RoomCheckInPage from "./routes/RoomCheckInPage.tsx";
 import AdminLoginPage from "./routes/admin/AdminLoginPage.tsx";
 import AdminLayout from "./routes/admin/AdminLayout.tsx";
 import AdminTimetablePage from "./routes/admin/AdminTimetablePage.tsx";
-import AdminManageCheckInsPage from "./routes/admin/AdminManageCheckInsPage.tsx";
-import {AdminProtectedRoute} from "./components/AdminProtectedRoute.tsx";
+import AdminManageRegistrationsPage from "./routes/admin/AdminManageRegistrationsPage.tsx";
+import {AdminProtectedRoute} from "./components/AdminProtectedRoute.tsx"
+import AdminSlotQrPage from "./routes/admin/AdminSlotQrPage.tsx"
+import AdminBaseQrPage from "./routes/admin/AdminBaseQrPage.tsx";
 
 function Router() {
 
@@ -24,8 +26,10 @@ function Router() {
                     <Route element={<AdminLayout />}>
                         <Route path="/admin" element={<Navigate to="/admin/timetable" replace />} />
                         <Route path="/admin/timetable" element={<AdminTimetablePage />} />
-                        <Route path="/admin/checkins" element={<AdminManageCheckInsPage />} />
+                        <Route path="/admin/registrations" element={<AdminManageRegistrationsPage />} />
                     </Route>
+                    <Route path="/admin/qr/:date/:slotId" element={<AdminSlotQrPage />} />
+                    <Route path="/admin/qr" element={<AdminBaseQrPage />} />
                 </Route>
                 {/*
                 <Route path="/checkin/" element={<CheckInDetailPage />} />

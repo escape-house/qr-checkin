@@ -10,7 +10,7 @@ data class AdminRegistrationDto(
     val id: String,
     val firstName: String,
     val lastName: String,
-    val email: String,
+    val email: String?,
     val roomName: String,
     val slotId: Long,
     @Serializable(with = LocalDateSerializer::class)
@@ -31,7 +31,7 @@ data class AdminRegistrationPageResponse(
 data class AdminRegistrationUpdateRequest(
     val firstName: String,
     val lastName: String,
-    val email: String,
+    val email: String?,
     val roomName: String,
     val slotId: Long,
     val agreesToTermsAndCondition: Boolean,

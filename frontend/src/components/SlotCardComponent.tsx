@@ -12,7 +12,7 @@ function SlotCardComponent({ slot }: Props) {
 
     return (
         <div
-            className="border border-[--color-border] rounded-[--radius-lg] p-4 mb-3 cursor-pointer bg-[--color-surface] hover:border-[--color-primary] transition-colors"
+            className="border border-border rounded-[--radius-lg] p-4 mb-3 cursor-pointer bg-surface hover:border-primary transition-colors"
             onClick={() => {
                 const date = slot.start.toISOString().slice(0, 10)
                 navigate(`/checkin/${date}/${slot.id}`, {state: {slot}})
@@ -24,13 +24,13 @@ function SlotCardComponent({ slot }: Props) {
             </div>
 
             {displayName && (
-                <div className="mt-1 text-[--color-text-secondary]">
+                <div className="mt-1 text-text-secondary">
                     {displayName}
                 </div>
             )}
 
             {slot.room && (
-                <div className="mt-1 text-[--color-muted] text-sm">
+                <div className="mt-1 text-muted text-sm">
                     {slot.room}
                 </div>
             )}
