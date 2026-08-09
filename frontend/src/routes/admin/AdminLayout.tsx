@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react"
-import {NavLink, Outlet, useMatch, useNavigate, useSearchParams} from "react-router-dom"
+import {NavLink, Outlet, useMatch, useNavigate, useSearchParams, Link} from "react-router-dom"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {logout} from "../../api/adminApi.ts"
 import {Button} from "../../components/ui/Button.tsx"
@@ -134,6 +134,15 @@ function AdminLayout() {
                 <div className="flex items-center gap-4 py-2">
                     {onTimetable && <TimetableDatePicker />}
                     <div className="text-2xl font-semibold tabular-nums leading-none">{time}</div>
+                    <Link
+                        to="/admin/qr"
+                        className="p-1.5 rounded hover:bg-border transition-colors text-muted hover:text-text"
+                        title="Check-In QR-Code"
+                    >
+                        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
+                            <path d="M3 3h7v7H3V3zm1 1v5h5V4H4zm1 1h3v3H5V5zM14 3h7v7h-7V3zm1 1v5h5V4h-5zm1 1h3v3h-3V5zM3 14h7v7H3v-7zm1 1v5h5v-5H4zm1 1h3v3H5v-3zM14 14h2v2h-2v-2zm3 0h2v2h-2v-2zm-3 3h2v2h-2v-2zm3 0h2v2h-2v-2z"/>
+                        </svg>
+                    </Link>
                 </div>
             </header>
 
