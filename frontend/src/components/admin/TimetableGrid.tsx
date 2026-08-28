@@ -28,18 +28,18 @@ export function TimetableGrid({slots, now}: Props) {
         byRoom.get(room)?.push(slot)
     }
 
-    const colClass = [
-        "grid-cols-1",
-        "grid-cols-1",
-        "grid-cols-2",
-        "grid-cols-3",
-        "grid-cols-4",
-        "grid-cols-5",
-        "grid-cols-6",
-    ][roomOrder.length] ?? "grid-cols-6"
+    const desktopColClass = [
+        "",
+        "",
+        "md:grid-cols-2",
+        "md:grid-cols-3",
+        "md:grid-cols-4",
+        "md:grid-cols-5",
+        "md:grid-cols-6",
+    ][roomOrder.length] ?? "md:grid-cols-6"
 
     return (
-        <div className={`grid ${colClass} gap-3 h-full`}>
+        <div className={`grid grid-cols-1 ${desktopColClass} gap-3`}>
             {roomOrder.map(room => {
                 const roomSlots = byRoom.get(room) ?? []
                 return (

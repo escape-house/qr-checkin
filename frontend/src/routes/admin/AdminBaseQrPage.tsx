@@ -1,11 +1,13 @@
 import {useNavigate} from "react-router-dom"
 import {QRCodeSVG} from "qrcode.react"
 import {useRef} from "react"
+import {useAdminTheme} from "../../hooks/useAdminTheme.ts"
 
 const QR_SIZE = 280
 const BASE_URL = `${location.origin}/`
 
 function AdminBaseQrPage() {
+    useAdminTheme()
     const navigate = useNavigate()
     const qrRef = useRef<SVGSVGElement>(null)
 
@@ -38,7 +40,7 @@ function AdminBaseQrPage() {
     }
 
     return (
-        <div className="min-h-screen bg-white flex flex-col">
+        <div className="min-h-screen bg-bg flex flex-col">
             {/* Back button — hidden when printing */}
             <button
                 onClick={() => navigate(-1)}
@@ -50,13 +52,14 @@ function AdminBaseQrPage() {
                 </svg>
             </button>
 
-            <div className="flex-1 flex flex-col items-center justify-center gap-8 px-6">
+            <div className="flex-1 flex flex-col items-center justify-center gap-8 w-full px-8">
                 {/* QR code */}
-                <div className="p-6 bg-white rounded-2xl shadow-lg border border-border print:shadow-none print:border-none">
+                <div className="p-6 bg-white rounded-2xl shadow-lg border border-border print:shadow-none print:border-none w-full md:max-w-xs">
                     <QRCodeSVG
                         ref={qrRef}
                         value={BASE_URL}
-                        size={QR_SIZE}
+                        size={512}
+                        className="w-full h-auto block"
                         level="M"
                     />
                 </div>

@@ -20,13 +20,13 @@ export type AdminSlot = {
 export type SlotStatus = "blocked" | "notBooked" | "checkin" | "active" | "past" | "future"
 
 export function getSlotStatus(slot: AdminSlot, now: Date): SlotStatus {
-    if (slot.type === "block") return "blocked"
+    if (slot.type === "block" && slot.checkedInPlayers.length === 0) return "blocked"
     if (slot.type === "mask") return "notBooked"
     const start = new Date(slot.start)
     const end = new Date(slot.end)
     if (now >= start && now <= end) return "active"
     if (now >= new Date(start.getTime() - 20 * 60 * 1000) && now < start) return "checkin"
-    if (now > end) return "past"
+    if (now > new Date(end.getTime() + 15 * 60 * 1000)) return "past"
     return "future"
 }
 

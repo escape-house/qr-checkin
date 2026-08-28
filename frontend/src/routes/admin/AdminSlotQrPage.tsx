@@ -1,14 +1,16 @@
 import {useNavigate, useParams} from "react-router-dom"
 import {QRCodeSVG} from "qrcode.react"
+import {useAdminTheme} from "../../hooks/useAdminTheme.ts"
 
 function AdminSlotQrPage() {
+    useAdminTheme()
     const {date, slotId} = useParams<{date: string; slotId: string}>()
     const navigate = useNavigate()
 
     const url = `${location.origin}/checkin/${date}/${slotId}`
 
     return (
-        <div className="min-h-screen bg-white flex flex-col">
+        <div className="min-h-screen bg-bg flex flex-col">
             <button
                 onClick={() => navigate(-1)}
                 className="absolute top-4 left-4 p-2 rounded-full hover:bg-black/5 transition-colors text-text"
@@ -19,11 +21,12 @@ function AdminSlotQrPage() {
                 </svg>
             </button>
 
-            <div className="flex-1 flex flex-col items-center justify-center gap-8 px-6">
-                <div className="p-5 bg-white rounded-2xl shadow-lg border border-border">
+            <div className="flex-1 flex flex-col items-center justify-center gap-8 w-full px-4">
+                <div className="p-5 bg-white rounded-2xl shadow-lg border border-border w-full md:max-w-xs">
                     <QRCodeSVG
                         value={url}
-                        size={Math.min(window.innerWidth - 80, 300)}
+                        size={512}
+                        className="w-full h-auto block"
                         level="M"
                     />
                 </div>

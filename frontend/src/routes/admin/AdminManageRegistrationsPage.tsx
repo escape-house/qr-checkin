@@ -6,6 +6,7 @@ import {RegistrationFilterBar} from "../../components/admin/RegistrationFilterBa
 import {RegistrationTable} from "../../components/admin/RegistrationTable.tsx"
 import {Pagination} from "../../components/admin/Pagination.tsx"
 import {EditRegistrationDialog} from "../../components/admin/EditRegistrationDialog.tsx"
+import KeyScreen from "../../components/KeyScreen.tsx"
 
 const EMPTY_FILTERS: RegistrationFilters = {name: "", date: "", room: "", slotId: ""}
 const PAGE_SIZE = 20
@@ -63,7 +64,7 @@ function AdminManageRegistrationsPage() {
                 onClear={clearFilters}
             />
 
-            {isPending && <p className="text-muted">Lade…</p>}
+            {isPending && <KeyScreen />}
             {isError && <p className="text-error">Fehler beim Laden der Registrierungen.</p>}
 
             {data && (

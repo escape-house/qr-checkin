@@ -1,20 +1,33 @@
-import type {CheckInSlot} from "../../types/Slot.ts"
-import SlotInfo from "./SlotInfo.tsx"
-import {Button} from "../ui/Button.tsx"
+import { useEffect, useState, type ReactNode } from "react"
+import "../KeyScreen.css"
 
 type Props = {
-    slot: CheckInSlot
-    onCheckInAnother: () => void
+    children: ReactNode
 }
 
-function SuccessScreen({slot, onCheckInAnother}: Props) {
+function SuccessScreen({ children }: Props) {
+    const [number] = useState(() => Math.floor(100 + Math.random() * 900))
+
+    useEffect(() => {
+        const previous = document.body.style.overflow
+        document.body.style.overflow = "hidden"
+        return () => {
+            document.body.style.overflow = previous
+        }
+    }, [])
+
     return (
-        <div className="text-center">
-            <SlotInfo slot={slot}/>
-            <p className="text-xl font-semibold text-success">Erfolgreich eingecheckt!</p>
-            <Button onClick={onCheckInAnother} className="mt-4">
-                Weitere Person einchecken
-            </Button>
+        <div className="loading-root bg-black" role="status">
+            <div className="loading-scene">
+                <img className="loading-key" src="/loading/key.webp" alt="" />
+                <div className="loading-tag-wrap">
+                    <img className="loading-tag" src="/loading/key_tag.webp" alt="" />
+                    <span className="loading-number">{number}</span>
+                </div>
+            </div>
+            <div className="loading-foreground bg-black/40 animate-none px-8 w-full h-full flex flex-col justify-center text-center">
+                {children}
+            </div>
         </div>
     )
 }

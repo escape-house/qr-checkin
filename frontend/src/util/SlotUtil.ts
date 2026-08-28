@@ -15,9 +15,9 @@ function getSlotDisplayName(slot: CheckInSlot){
     return ""
 }
 
-function buildDisplayDate(start: Date, end: Date): string {
+function buildDisplayDate(start: Date): string {
     const time = (d: Date) => d.toLocaleTimeString("de-AT", {hour: "2-digit", minute: "2-digit"})
-    return `${time(start)} – ${time(end)}`
+    return `${time(start)}`
 }
 
 function fromDto(dto: CheckInSlotDto): CheckInSlot {
@@ -27,7 +27,7 @@ function fromDto(dto: CheckInSlotDto): CheckInSlot {
         ...dto,
         start,
         end,
-        displayDate: buildDisplayDate(start, end),
+        displayDate: buildDisplayDate(start),
     }
 }
 

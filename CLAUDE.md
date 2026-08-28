@@ -73,8 +73,8 @@ React 19 with React Router v7. Currently being actively restructured — old pag
 
 - **`src/app/main.tsx`** — app entry point
 - **`src/Router.tsx`** — route definitions
-- **`src/routes/CheckInPage.tsx`** — slot listing landing page (WIP)
-- **`src/routes/CheckInDetailPage.tsx`** — per-slot check-in form
+- **`src/routes/CheckInOverviewPage.tsx`** — slot listing landing page (WIP)
+- **`src/routes/CheckInPage.tsx`** — per-slot check-in form
 
 Admin routes (`/admin`, `/admin/dashboard`, `/admin/registrations`) are commented out in the router while the frontend is being rebuilt.
 

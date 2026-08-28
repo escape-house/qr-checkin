@@ -1,51 +1,61 @@
+import {useState} from "react"
+import {useLocation, useParams} from "react-router-dom"
 import {useQuery} from "@tanstack/react-query"
-import SlotCardComponent from "../components/SlotCardComponent.tsx"
-import {SlotUtils} from "../util/SlotUtil.ts";
-import {useState} from "react";
-import {fetchCheckInSlots} from "../api/checkInApi.ts";
+import type {CheckInSlot} from "../types/Slot.ts"
+import {fetchCheckInSlot} from "../api/checkInApi.ts"
+import CheckInForm from "../components/checkin/CheckInForm.tsx"
+import SuccessScreen from "../components/checkin/SuccessScreen.tsx"
+import KeyScreen from "../components/KeyScreen.tsx"
 import {Button} from "../components/ui/Button.tsx"
-import {Link} from "react-router-dom"
+import {useT} from "../i18n/LanguageContext.tsx"
 
 function CheckInPage() {
-    const [moreExpanded, setMoreExpanded] = useState<boolean>(false)
-    const {data: slots, isPending, isError} = useQuery({
-        queryKey: ["checkInSlots"],
-        queryFn: fetchCheckInSlots,
+    const {t} = useT()
+    const {date, slotId, roomName} = useParams<{ date?: string; slotId?: string; roomName?: string }>()
+    const location = useLocation()
+    const slotFromState: CheckInSlot | undefined = location.state?.slot
+
+    const isRoomMode = roomName !== undefined
+
+    // Room mode: synthesize a slotless slot from the URL param.
+    const roomSlot: CheckInSlot | undefined = isRoomMode ? {
+        id: null,
+        start: new Date(),
+        end: new Date(),
+        players: null,
+        name: null,
+        companyName: null,
+        room: decodeURIComponent(roomName.replace("_", " ")),
+        displayDate: "",
+    } : undefined
+
+    const {data: fetchedSlot, isPending, isError} = useQuery({
+        queryKey: ["checkInSlot", date, slotId],
+        queryFn: () => fetchCheckInSlot(date!, slotId!),
+        enabled: !isRoomMode && !slotFromState,
     })
 
-    if (isPending) return <p className="text-text-secondary p-4">Lade Slots…</p>
-    if (isError) return <p className="text-error p-4">Fehler beim Laden der Slots.</p>
-    if (slots.length === 0) return <p className="text-text-secondary p-4">Keine aktiven Slots.</p>
+    const slot = roomSlot ?? slotFromState ?? fetchedSlot
+
+    const [checkedIn, setCheckedIn] = useState(false)
+
+    if (!isRoomMode && !slotFromState && isPending) return <KeyScreen />
+    if (!isRoomMode && !slotFromState && isError) return <p className="text-error p-4">{t("checkinErrorLoading")}</p>
+    if (!slot) return null
+
+    if (checkedIn) return (
+        <SuccessScreen>
+            <p className="text-2xl font-semibold text-success">{t("checkinSuccessTitle")}</p>
+            <p>{t("checkinSuccessMessage")}</p>
+            <Button onClick={() => setCheckedIn(false)} className="mt-4">
+                {t("checkinAnotherPerson")}
+            </Button>
+        </SuccessScreen>
+    )
 
     return (
-        <div className="max-w-lg mx-auto px-4 py-6 flex flex-col min-h-screen">
-            <div className="flex-1">
-                <h1 className="text-2xl font-bold mb-4">Check-In</h1>
-
-                {slots
-                    .filter(SlotUtils.isBooked)
-                    .sort(SlotUtils.slotStartTimeComparator)
-                    .map((slot) => (
-                    <SlotCardComponent key={slot.id} slot={slot}/>
-                ))}
-
-                <Button variant="secondary" onClick={() => setMoreExpanded(!moreExpanded)} className="mb-3">
-                    {moreExpanded ? "Weniger anzeigen" : "Mehr anzeigen"}
-                </Button>
-
-                {moreExpanded && slots
-                    .filter(SlotUtils.isNotBooked)
-                    .sort(SlotUtils.slotStartTimeComparator)
-                    .map((slot) => (
-                        <SlotCardComponent key={slot.id} slot={slot}/>
-                    ))
-                }
-            </div>
-
-            <footer className="mt-8 pt-4 border-t border-border flex justify-between text-sm text-muted">
-                <Link to="/agb" className="hover:text-text transition-colors">AGB</Link>
-                <Link to="/rooms" className="hover:text-primary transition-colors">Raum nicht dabei?</Link>
-            </footer>
+        <div className="max-w-lg mx-auto px-4 py-6">
+            <CheckInForm slot={slot} onSuccess={() => setCheckedIn(true)} />
         </div>
     )
 }

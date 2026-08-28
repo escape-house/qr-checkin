@@ -1,0 +1,73 @@
+import type {AdminSlot} from "../../api/dashboardApi.ts"
+import {getSlotStatus} from "../../api/dashboardApi.ts"
+import {SlotCard} from "./SlotCard.tsx"
+
+type Props = {
+    slots: AdminSlot[]
+    now: Date
+}
+
+function roomImageSrc(room: string): string {
+    const key = room.toLowerCase().replace(/\s+/g, "_")
+    return `/rooms/${key}.jpg`
+}
+
+export function TimetableGrid({slots, now}: Props) {
+    // Build ordered room list (preserving first-seen order, max 6)
+    const roomOrder: string[] = []
+    for (const slot of slots) {
+        const room = slot.room ?? "Unbekannt"
+        if (!roomOrder.includes(room)) roomOrder.push(room)
+        if (roomOrder.length === 6) break
+    }
+
+    const byRoom = new Map<string, AdminSlot[]>()
+    for (const room of roomOrder) byRoom.set(room, [])
+    for (const slot of slots) {
+        const room = slot.room ?? "Unbekannt"
+        byRoom.get(room)?.push(slot)
+    }
+
+    return (
+        // Extend to screen edges by cancelling the parent p-4, then scroll within
+        <div className="overflow-x-auto -mx-4 px-4">
+            <div className="flex gap-3 min-w-max pb-4">
+                {roomOrder.map(room => {
+                    const roomSlots = byRoom.get(room) ?? []
+                    return (
+                        <div key={room} className="w-44 shrink-0 flex flex-col gap-2">
+                            {/* Room header image */}
+                            <div className="rounded-md overflow-hidden border border-border">
+                                <div className="h-16 relative">
+                                    <img
+                                        src={roomImageSrc(room)}
+                                        alt={room}
+                                        onError={e => { (e.currentTarget as HTMLImageElement).src = "/rooms/placeholder.jpg" }}
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-black/40 flex items-end px-2 py-1">
+                                        <span className="text-white text-xs font-bold uppercase tracking-wider leading-tight drop-shadow">
+                                            {room}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {roomSlots.length === 0 ? (
+                                <p className="text-xs text-muted px-1">Keine Slots</p>
+                            ) : (
+                                roomSlots.map(slot => (
+                                    <SlotCard
+                                        key={slot.id ?? `${slot.room}-${slot.start}`}
+                                        slot={slot}
+                                        status={getSlotStatus(slot, now)}
+                                    />
+                                ))
+                            )}
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
+}

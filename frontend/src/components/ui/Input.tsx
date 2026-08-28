@@ -9,8 +9,9 @@ export function Input({ error = false, className = "", ...props }: Props) {
         <input
             {...props}
             className={[
-                "w-full rounded-radius-md border border-text-secondary px-3 py-2 text-base bg-surface text-text placeholder-muted transition-colors",
-                "focus:outline-none focus:shadow",
+                "w-full rounded-md border px-3 py-2 text-base bg-surface-raised text-text placeholder-muted transition-colors",
+                error ? "border-error" : "border-border",
+                "focus:outline-none focus:border-muted",
                 className,
             ]
                 .filter(Boolean)

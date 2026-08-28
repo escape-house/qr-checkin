@@ -1,8 +1,8 @@
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import CheckInOverviewPage from "./routes/CheckInOverviewPage.tsx";
 import CheckInPage from "./routes/CheckInPage.tsx";
-import CheckInDetailPage from "./routes/CheckInDetailPage.tsx";
 import AllRoomsPage from "./routes/AllRoomsPage.tsx";
-import RoomCheckInPage from "./routes/RoomCheckInPage.tsx";
+import CheckInLayout from "./routes/CheckInLayout.tsx";
 import AdminLoginPage from "./routes/admin/AdminLoginPage.tsx";
 import AdminLayout from "./routes/admin/AdminLayout.tsx";
 import AdminTimetablePage from "./routes/admin/AdminTimetablePage.tsx";
@@ -10,6 +10,7 @@ import AdminManageRegistrationsPage from "./routes/admin/AdminManageRegistration
 import {AdminProtectedRoute} from "./components/AdminProtectedRoute.tsx"
 import AdminSlotQrPage from "./routes/admin/AdminSlotQrPage.tsx"
 import AdminBaseQrPage from "./routes/admin/AdminBaseQrPage.tsx";
+import KeyScreen from "./components/KeyScreen.tsx";
 
 function Router() {
 
@@ -17,11 +18,14 @@ function Router() {
         <>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<CheckInPage />} />
-                <Route path="/checkin/:date/:slotId" element={<CheckInDetailPage />} />
-                <Route path="/rooms" element={<AllRoomsPage />} />
-                <Route path="/rooms/:roomName" element={<RoomCheckInPage />} />
+                <Route element={<CheckInLayout />}>
+                    <Route path="/" element={<CheckInOverviewPage />} />
+                    <Route path="/checkin/:date/:slotId" element={<CheckInPage />} />
+                    <Route path="/rooms" element={<AllRoomsPage />} />
+                    <Route path="/rooms/:roomName" element={<CheckInPage />} />
+                </Route>
                 <Route path="/admin/login" element={<AdminLoginPage />} />
+                <Route path="/loading-test" element={<KeyScreen />} />
                 <Route element={<AdminProtectedRoute />}>
                     <Route element={<AdminLayout />}>
                         <Route path="/admin" element={<Navigate to="/admin/timetable" replace />} />
@@ -31,23 +35,7 @@ function Router() {
                     <Route path="/admin/qr/:date/:slotId" element={<AdminSlotQrPage />} />
                     <Route path="/admin/qr" element={<AdminBaseQrPage />} />
                 </Route>
-                {/*
-                <Route path="/checkin/" element={<CheckInDetailPage />} />
-                <Route
-                    path="/admin"
-                    element={<AdminPage />}
-                />
-                <Route element={<AdminProtectedRoute />}>
-                    <Route
-                        path="/admin/dashboard"
-                        element={<AdminDashboardPage />}>
-                    </Route>
-                    <Route
-                        path="/admin/registrations"
-                        element={<AdminRegistrationsPage />}
-                    />
-                </Route>
-                -*/}
+                <Route path="*" element={<KeyScreen number={404}>Not Found</KeyScreen>} />
             </Routes>
         </BrowserRouter>
         </>

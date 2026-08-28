@@ -79,7 +79,7 @@ export function RegistrationTable({
     onCancelDelete,
 }: Props) {
     return (
-        <div className="overflow-x-auto rounded-[--radius-md] border border-border">
+        <div className="overflow-x-auto rounded-md border border-border">
             <table className="w-full text-sm border-collapse">
                 <thead>
                     <tr className="bg-surface border-b border-border text-left text-text-secondary">

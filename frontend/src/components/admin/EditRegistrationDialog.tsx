@@ -53,7 +53,7 @@ export function EditRegistrationDialog({registration, onClose}: Props) {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
             onClick={e => { if (e.target === e.currentTarget) onClose() }}
         >
-            <div className="bg-surface border border-border rounded-[--radius-lg] p-6 w-full max-w-md mx-4 flex flex-col gap-4 shadow-xl">
+            <div className="bg-surface border border-border rounded-lg p-6 w-full max-w-md mx-4 flex flex-col gap-4 shadow-xl">
                 <h2 className="text-lg font-semibold">Registrierung bearbeiten</h2>
 
                 <div className="flex gap-3">

@@ -1,6 +1,7 @@
 import {useQuery} from "@tanstack/react-query"
 import {Navigate, Outlet, useLocation} from "react-router-dom"
 import {fetchSession} from "../api/adminApi.ts"
+import KeyScreen from "./KeyScreen.tsx"
 
 export function AdminProtectedRoute() {
     const location = useLocation()
@@ -11,11 +12,7 @@ export function AdminProtectedRoute() {
     })
 
     if (isPending) {
-        return (
-            <div className="flex items-center justify-center min-h-screen text-muted">
-                Lade…
-            </div>
-        )
+        return <KeyScreen />
     }
 
     if (!data?.authenticated) {

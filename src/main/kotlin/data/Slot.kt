@@ -12,6 +12,7 @@ data class Slot(
     @Serializable(with = LocalDateSerializer::class)
     val end: LocalDateTime,
     val players: Int?,
+    //
     val type: String?,
     val customer: Customer?,
     val room: Room

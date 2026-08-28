@@ -14,7 +14,6 @@ import kotlinx.coroutines.sync.withLock
 import java.time.LocalDate
 import java.time.LocalDateTime
 import kotlin.time.Duration
-import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
 
@@ -34,7 +33,12 @@ class QuinbookService(
 
     @Volatile
     private var lastCacheUpdate: Long = 0L
-
+    /*
+    1. Cache missing → sync refresh
+    2. Hard timeout expired → sync refresh
+    3. Soft timeout expired → background refresh, return stale cache immediately
+    4. Cache fresh → return it directly
+    */
     suspend fun getSlotsOfToday(): List<Slot> {
         val currentCache = cachedSlots
         if (currentCache == null) {
@@ -48,7 +52,6 @@ class QuinbookService(
         }
 
         return currentCache
-        return refreshCacheIfRequired()
     }
 
     private fun isCacheExpired(timeout: Duration) = System.currentTimeMillis() - lastCacheUpdate >= timeout.inWholeMilliseconds
