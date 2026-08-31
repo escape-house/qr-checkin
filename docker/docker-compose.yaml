@@ -1,0 +1,40 @@
+services:
+  mongodb:
+    image: mongo:8
+    container_name: escape-house-mongodb
+    restart: unless-stopped
+    env_file:
+      - path: .env.example
+        required: true # default
+
+    volumes:
+      - escape-house-mongodb-data:/data/db
+      - ./mongodb/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mongosh --quiet --username \"$${MONGO_INITDB_ROOT_USERNAME}\" --password \"$${MONGO_INITDB_ROOT_PASSWORD}\" --authenticationDatabase admin --eval \"quit(db.adminCommand('ping').ok ? 0 : 1)\""
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  check-in:
+    image: ghcr.io/escape-house/qr-checkin:v0.0.1
+    container_name: qr-checkin-app
+    restart: unless-stopped
+    env_file:
+      - path: .env.example
+        required: true # default
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+    ports:
+      - "7070:8080"
+
+volumes:
+  escape-house-mongodb-data:
