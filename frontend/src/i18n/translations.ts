@@ -31,6 +31,10 @@ const translations = {
         de: "Raum nicht dabei?",
         en: "Room not listed?",
     },
+    checkInTimeInfo: {
+        de: "Der Checkin ist 45 Minuten von dem gebuchten Erlebnis möglich.",
+        en: "Check-in is possible 45 minutes before the booking."
+    },
 
     // ── All Rooms page ─────────────────────────────────────────
     roomsTitle: {
@@ -56,8 +60,8 @@ const translations = {
         en: "Successfully checked in!",
     },
     checkinSuccessMessage: {
-        de: "Das Dienstpersonal wird sie zur genau zur gebuchten Zeit einlassen.",
-        en: "Staff will let you in at exactly your booked time.",
+        de: "Euer Gamemaster wird euch zur gebuchten Startzeit abholen.",
+        en: "Your game master will pick you up at the booked start time.",
     },
     checkinAnotherPerson: {
         de: "Weitere Person einchecken",
@@ -223,7 +227,7 @@ export default translations
 
 // Room name translations — key is the German name from Quinbook, value is the English display name.
 export const roomNameTranslations: Record<string, string> = {
-    "Die zauberhafte Winkelgasse": "The Magical Alley",
+    "Die zauberhafte Winkelgasse": "Die zauberhafte Winkelgasse",
     "Jack the Ripper":            "Jack the Ripper",
     "Saw":                        "Saw",
     "Villa des Wahnsinns":        "Villa of Madness",

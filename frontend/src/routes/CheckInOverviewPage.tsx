@@ -15,7 +15,6 @@ function CheckInOverviewPage() {
 
     if (isPending) return <KeyScreen />
     if (isError) return <p className="text-error p-4">{t("overviewErrorLoading")}</p>
-    if (slots.length === 0) return <p className="text-text-secondary p-4">{t("overviewNoSlots")}</p>
 
     return (
         <div className="max-w-lg mx-auto px-4 flex flex-col min-h-screen">
@@ -25,12 +24,20 @@ function CheckInOverviewPage() {
                     {t("overviewTitle")}
                 </h1>
             </header>
-            <div className="flex-1">
-                {slots
-                    .sort(SlotUtils.slotStartTimeComparator)
-                    .map((slot) => (
-                    <SlotCardComponent key={slot.id} slot={slot}/>
-                ))}
+            {
+                slots.length === 0 ?
+                    <p className="text-center text-text-secondary p-4">{t("overviewNoSlots")}</p>
+                    :
+                    <div className="flex-1">
+                        {slots
+                            .sort(SlotUtils.slotStartTimeComparator)
+                            .map((slot) => (
+                            <SlotCardComponent key={slot.id} slot={slot}/>
+                        ))}
+                    </div>
+            }
+            <div className={"p-4 text-center w-full"}>
+                {t("checkInTimeInfo")}
             </div>
 
             <footer className="mt-8 mb-4 pt-4 border-t border-border flex justify-between text-sm text-text">
