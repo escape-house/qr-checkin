@@ -25,7 +25,7 @@ function SuccessScreen({ children }: Props) {
                     <span className="loading-number">{number}</span>
                 </div>
             </div>
-            <div className="loading-foreground bg-black/40 animate-none px-8 w-full h-full flex flex-col justify-center text-center">
+            <div className="loading-foreground bg-black/40 px-8 w-full h-full flex flex-col justify-center text-center" style={{animation: "none"}}>
                 {children}
             </div>
         </div>
