@@ -51,7 +51,7 @@ const translations = {
         en: "Room not listed?",
     },
     checkInTimeInfo: {
-        de: "Der Checkin ist 45 Minuten von dem gebuchten Erlebnis möglich.",
+        de: "Der Check-in ist 45 Minuten vor dem gebuchten Erlebnis möglich.",
         en: "Check-in is possible 45 minutes before the booking."
     },
 
@@ -253,6 +253,6 @@ export const roomNameTranslations: Record<string, string> = {
     "Die zauberhafte Winkelgasse": "Die zauberhafte Winkelgasse",
     "Jack the Ripper":            "Jack the Ripper",
     "Saw":                        "Saw",
-    "Villa des Wahnsinns":        "Villa of Madness1",
+    "Villa des Wahnsinns":        "Villa of Madness",
     "Western Bank":               "Western Bank",
 }
