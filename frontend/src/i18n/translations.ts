@@ -92,8 +92,8 @@ const translations = {
         en: "Please enter a valid email address.",
     },
     formConsentPrefix: {
-        de: "Ich habe die Hausordnung gelesen und ihr und den",
-        en: "I have read the house rules and agree to the",
+        de: "Ich habe die Teilnahmebedingungen gelesen und stimme ihnen und den",
+        en: "I have read the Terms of Participation and agree to them and the",
     },
     formConsentLinkText: {
         de: "Allgemeinen Geschäftsbedingungen",
@@ -111,6 +111,10 @@ const translations = {
         de: "Ich möchte den Newsletter von Escape House Vorchdorf erhalten.",
         en: "I want to receive newsletters from Escape House Vorchdorf.",
     },
+    formRequiredField: {
+        de: "* Pflichtfeld",
+        en: "* Required field",
+    },
     formSubmitLoading: {
         de: "Wird eingecheckt…",
         en: "Checking in…",
@@ -126,8 +130,8 @@ const translations = {
 
     // ── House rules ────────────────────────────────────────────
     houseRulesTitle: {
-        de: "Hausordnung & Teilnahmebedingungen",
-        en: "House Rules & Terms of Participation",
+        de: "Teilnahmebedingungen",
+        en: "Terms of Participation",
     },
 
     houseRulesHealthTitle: {
