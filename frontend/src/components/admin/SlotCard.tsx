@@ -137,8 +137,8 @@ export function SlotCard({slot, status}: Props) {
                 </div>
 
                 {/* Internal comment */}
-                <div className={"text-xs italic opacity-70 leading-tight truncate"+slot.comment?"":" invisible"} title={slot.comment}>
-                    {slot.comment}
+                <div className={`text-[11px] italic opacity-50 leading-tight truncate ${slot.comment ? "" : "invisible"}`} title={slot.comment ?? undefined}>
+                    {slot.comment?slot.comment:"Comment invisible"}
                 </div>
 
                 {/* Progress + count — always rendered to keep uniform card height */}
