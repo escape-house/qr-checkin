@@ -38,7 +38,6 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:3.5.2")
     implementation("io.ktor:ktor-client-content-negotiation:3.5.2")
     implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.2")
-    implementation("io.ktor:ktor-server-cors:3.5.2")
     implementation("io.ktor:ktor-server-auth:3.5.2")
     implementation("io.ktor:ktor-server-sessions:3.5.2")
 

@@ -9,7 +9,6 @@ ktor:
       - at.escapehouse.routing.RoutingKt.configureRouting
       - at.escapehouse.MainKt.configureSerialization
       - at.escapehouse.MainKt.configureErrorHandling
-      - at.escapehouse.MainKt.configureCors
 
     dependencies:
       - at.escapehouse.service.HttpClientKt.provideHttpClient
