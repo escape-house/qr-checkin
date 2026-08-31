@@ -84,7 +84,6 @@ val npmBuild by tasks.registering(Exec::class) {
     workingDir(frontendDirectory.asFile)
     commandLine(npmExecutable, "run", "build")
 
-    inputs.file(dotEnvFile)
     inputs.files(
         fileTree(frontendDirectory) {
             exclude(
@@ -95,7 +94,7 @@ val npmBuild by tasks.registering(Exec::class) {
     )
 
     doFirst {
-        environment(dotEnvVariables.get())
+        environment(dotEnvVariables.getOrElse(emptyMap()))
     }
 
     outputs.dir(frontendDistDirectory)
@@ -172,6 +171,6 @@ tasks.withType<JavaExec>().configureEach {
     inputs.file(dotEnvFile)
 
     doFirst {
-        javaExecTask.environment(dotEnvVariables.get())
+        javaExecTask.environment(dotEnvVariables.getOrElse(emptyMap()))
     }
 }

@@ -19,6 +19,7 @@ fun Application.configureRouting(
 ) {
     routing {
         route("/api") {
+            configRoutes()
             quinbookRoutes(quinbookService, quinbookAuth)
             checkInRoutes(checkInService)
             authenticate("admin-session") {
