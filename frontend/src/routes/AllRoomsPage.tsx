@@ -6,7 +6,7 @@ import KeyScreen from "../components/KeyScreen.tsx"
 import {useT} from "../i18n/LanguageContext.tsx"
 
 function AllRoomsPage() {
-    const {t} = useT()
+    const {t, tRoomName} = useT()
     const navigate = useNavigate()
     const {data: rooms, isPending, isError} = useQuery({
         queryKey: ["rooms"],
@@ -44,7 +44,7 @@ function AllRoomsPage() {
                         alt={room}
                         className="w-full object-cover h-40"
                     />
-                    <div className="px-4 py-3 font-semibold text-lg">{room}</div>
+                    <div className="px-4 py-3 font-semibold text-lg">{tRoomName(room)}</div>
                 </div>
             ))}
         </div>

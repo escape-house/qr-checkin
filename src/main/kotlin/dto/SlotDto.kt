@@ -6,6 +6,9 @@ import at.escapehouse.data.Room
 import at.escapehouse.data.Slot
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import java.time.LocalDateTime
 
 @Serializable
@@ -30,7 +33,9 @@ data class QuinbookSlotResponseDto(
                 room = Room(
                     id = roomDto?.id,
                     name = roomDto?.name
-                )
+                ),
+                comment = slot.internalInfo?.takeIf { it.isNotBlank() },
+                language = slot.parseLanguage()
             )
         }
     }
@@ -59,7 +64,14 @@ data class SlotDto(
 
     val type: String?,
     val customer: Customer?,
-
-    val iEvent: Long
+    val iEvent: Long,
+    val internalInfo: String? = null,
+    val attributes: String? = null
 ){
+    fun parseLanguage(): String? = attributes?.let { attrs ->
+        runCatching {
+            Json.parseToJsonElement(attrs).jsonObject["language"]?.jsonPrimitive?.content
+                ?.takeIf { it.isNotBlank() }
+        }.getOrNull()
+    }
 }

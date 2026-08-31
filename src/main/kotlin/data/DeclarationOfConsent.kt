@@ -19,6 +19,7 @@ data class DeclarationOfConsent(
     val email: String?,
     val agreesToTermsAndCondition: Boolean,
     val wantsPhotosOnline: Boolean,
+    val wantsNewsletter: Boolean = false,
     val roomName: String,
     val slotId: Long?,
     @Serializable(with = LocalDateSerializer::class)

@@ -91,13 +91,14 @@ export function RegistrationTable({
                         <th className="px-3 py-2 font-medium">Datum</th>
                         <th className="px-3 py-2 font-medium text-center">AGB</th>
                         <th className="px-3 py-2 font-medium text-center">Fotos</th>
+                        <th className="px-3 py-2 font-medium text-center">Newsletter</th>
                         <th className="px-3 py-2 font-medium"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {items.length === 0 && (
                         <tr>
-                            <td colSpan={9} className="px-3 py-6 text-center text-muted">
+                            <td colSpan={10} className="px-3 py-6 text-center text-muted">
                                 Keine Einträge gefunden.
                             </td>
                         </tr>
@@ -117,6 +118,7 @@ export function RegistrationTable({
                             </td>
                             <BoolCell value={reg.agreesToTermsAndCondition} />
                             <BoolCell value={reg.wantsPhotosOnline} />
+                            <BoolCell value={reg.wantsNewsletter} />
                             <td className="px-3 py-2">
                                 <RowActions
                                     reg={reg}

@@ -19,6 +19,7 @@ data class CheckinSlotDto(
     val name: String?,
     val companyName: String?,
     val room: String?,
+    val language: String? = null,
 ) {
     companion object {
         fun fromSlot(slot: Slot): CheckinSlotDto {
@@ -38,6 +39,7 @@ data class CheckinSlotDto(
                 name,
                 slot.customer?.companyName?.trim(),
                 slot.room.name,
+                slot.language,
             )
         }
     }
@@ -51,6 +53,7 @@ data class PrivacyCheckinSlotDto(
     @Serializable(with = LocalDateSerializer::class)
     val end: LocalDateTime,
     val room: String?,
+    val language: String? = null,
 ) {
     companion object {
         fun fromSlot(slot: Slot) = PrivacyCheckinSlotDto(
@@ -58,6 +61,7 @@ data class PrivacyCheckinSlotDto(
             slot.start,
             slot.end,
             slot.room.name,
+            slot.language,
         )
     }
 }
@@ -74,7 +78,9 @@ data class AdminCheckInSlot(
     val companyName: String?,
     val room: String?,
     val checkedInPlayers: List<DeclarationOfConsent>,
-    val type: String
+    val type: String,
+    val comment: String? = null,
+    val language: String? = null,
 ) {
     companion object {
         suspend fun fromSlot(slot: Slot, checkInRepository: CheckInRepository): AdminCheckInSlot {
@@ -87,7 +93,9 @@ data class AdminCheckInSlot(
                 slot.customer?.companyName?.trim(),
                 slot.room.name,
                 checkInRepository.findBySlotId(slot.id?:-1),
-                slot.type?:""
+                slot.type?:"",
+                slot.comment,
+                slot.language,
             )
         }
     }

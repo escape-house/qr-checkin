@@ -21,6 +21,7 @@ export function EditRegistrationDialog({registration, onClose}: Props) {
         slotId: registration.slotId,
         agreesToTermsAndCondition: registration.agreesToTermsAndCondition,
         wantsPhotosOnline: registration.wantsPhotosOnline,
+        wantsNewsletter: registration.wantsNewsletter,
     })
 
     useEffect(() => {
@@ -111,6 +112,13 @@ export function EditRegistrationDialog({registration, onClose}: Props) {
                     onChange={e => setForm(f => ({...f, wantsPhotosOnline: e.target.checked}))}
                 >
                     Fotos online erlaubt
+                </Checkbox>
+
+                <Checkbox
+                    checked={form.wantsNewsletter}
+                    onChange={e => setForm(f => ({...f, wantsNewsletter: e.target.checked}))}
+                >
+                    Newsletter
                 </Checkbox>
 
                 {mutation.isError && (

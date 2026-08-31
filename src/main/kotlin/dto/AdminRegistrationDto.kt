@@ -17,6 +17,7 @@ data class AdminRegistrationDto(
     val registrationDate: LocalDateTime,
     val agreesToTermsAndCondition: Boolean,
     val wantsPhotosOnline: Boolean,
+    val wantsNewsletter: Boolean = false,
 )
 @Serializable
 data class AdminRegistrationPageResponse(
@@ -36,4 +37,5 @@ data class AdminRegistrationUpdateRequest(
     val slotId: Long,
     val agreesToTermsAndCondition: Boolean,
     val wantsPhotosOnline: Boolean,
+    val wantsNewsletter: Boolean = false,
 )

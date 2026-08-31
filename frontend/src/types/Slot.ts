@@ -6,6 +6,7 @@ export type CheckInSlotDto = {
     name: string | null
     companyName: string | null
     room: string | null
+    language?: string
 }
 
 export type CheckInSlot = {
@@ -17,4 +18,5 @@ export type CheckInSlot = {
     companyName: string | null
     room: string | null
     displayDate: string
+    language?: string
 }

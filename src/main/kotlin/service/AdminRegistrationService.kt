@@ -145,4 +145,6 @@ private fun DeclarationOfConsent.toAdminDto() =
             agreesToTermsAndCondition,
         wantsPhotosOnline =
             wantsPhotosOnline,
+        wantsNewsletter =
+            wantsNewsletter,
     )

@@ -7,7 +7,7 @@ type Props = {
 }
 
 function SlotInfo({slot}: Props) {
-    const {t} = useT()
+    const {t, tRoomName} = useT()
     const displayName = SlotUtils.getSlotDisplayName(slot)
 
     return (
@@ -15,7 +15,7 @@ function SlotInfo({slot}: Props) {
             <div className="relative">
                 {slot.room && (
                     <div className="absolute top-4 left-4 z-10 font-bold text-2xl leading-10 text-white drop-shadow-lg w-2/3">
-                        {slot.room}
+                        {tRoomName(slot.room)}
                     </div>
                 )}
                 <img

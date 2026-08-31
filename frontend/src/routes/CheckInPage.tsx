@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {useLocation, useParams} from "react-router-dom"
 import {useQuery} from "@tanstack/react-query"
 import type {CheckInSlot} from "../types/Slot.ts"
@@ -10,7 +10,7 @@ import {Button} from "../components/ui/Button.tsx"
 import {useT} from "../i18n/LanguageContext.tsx"
 
 function CheckInPage() {
-    const {t} = useT()
+    const {t, setLang} = useT()
     const {date, slotId, roomName} = useParams<{ date?: string; slotId?: string; roomName?: string }>()
     const location = useLocation()
     const slotFromState: CheckInSlot | undefined = location.state?.slot
@@ -36,6 +36,11 @@ function CheckInPage() {
     })
 
     const slot = roomSlot ?? slotFromState ?? fetchedSlot
+
+    // Auto-switch to English when the booking was made in English.
+    useEffect(() => {
+        if (slot?.language === "en") setLang("en")
+    }, [slot?.language])
 
     const [checkedIn, setCheckedIn] = useState(false)
 

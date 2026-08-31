@@ -28,6 +28,7 @@ function fromDto(dto: CheckInSlotDto): CheckInSlot {
         start,
         end,
         displayDate: buildDisplayDate(start),
+        language: dto.language,
     }
 }
 

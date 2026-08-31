@@ -8,6 +8,7 @@ export type Registration = {
     registrationDate: string
     agreesToTermsAndCondition: boolean
     wantsPhotosOnline: boolean
+    wantsNewsletter: boolean
 }
 
 export type RegistrationPage = {
@@ -33,6 +34,7 @@ export type RegistrationUpdate = {
     slotId: number
     agreesToTermsAndCondition: boolean
     wantsPhotosOnline: boolean
+    wantsNewsletter: boolean
 }
 
 export async function fetchRegistrations(

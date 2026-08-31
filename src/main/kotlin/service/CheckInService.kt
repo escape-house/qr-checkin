@@ -35,6 +35,8 @@ class CheckInService(
                 checkInForm.agreesToTermsAndCondition,
             wantsPhotosOnline =
                 checkInForm.wantsPhotosOnline,
+            wantsNewsletter =
+                checkInForm.wantsNewsletter,
             roomName = normalizedRoomName,
             slotId = slotId?:-1
         )

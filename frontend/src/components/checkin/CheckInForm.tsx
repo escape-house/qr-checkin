@@ -15,6 +15,7 @@ const emptyForm: CheckInFormData = {
     email: "",
     agreesToTermsAndCondition: false,
     wantsPhotosOnline: false,
+    wantsNewsletter: false,
 }
 
 type Props = {
@@ -85,6 +86,13 @@ function CheckInForm({slot, onSuccess}: Props) {
                 onChange={e => setForm(f => ({...f, wantsPhotosOnline: e.target.checked}))}
             >
                 {t("formPhotoConsent")}
+            </Checkbox>
+
+            <Checkbox
+                checked={form.wantsNewsletter}
+                onChange={e => setForm(f => ({...f, wantsNewsletter: e.target.checked}))}
+            >
+                {t("formNewsletter")}
             </Checkbox>
 
             {mutation.isError && (

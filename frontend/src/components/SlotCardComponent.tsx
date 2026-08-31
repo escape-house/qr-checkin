@@ -1,6 +1,7 @@
 import type { CheckInSlot } from "../types/Slot.ts"
 import { useNavigate } from "react-router-dom"
 import { SlotUtils } from "../util/SlotUtil.ts"
+import { useT } from "../i18n/LanguageContext.tsx"
 
 type Props = {
     slot: CheckInSlot
@@ -8,6 +9,7 @@ type Props = {
 
 function SlotCardComponent({ slot }: Props) {
     const navigate = useNavigate()
+    const { tRoomName } = useT()
     const displayName = SlotUtils.getSlotDisplayName(slot)
 
     return (
@@ -21,7 +23,7 @@ function SlotCardComponent({ slot }: Props) {
             <div className="relative">
                 {slot.room && (
                     <div className="absolute top-4 left-4 z-10 font-bold text-2xl leading-10 text-white drop-shadow-lg w-2/3">
-                        {slot.room}
+                        {slot.language === "en"?tRoomName(slot.room):slot.room}
                     </div>
                 )}
                 <img src={SlotUtils.getRoomImageUrl(slot.room ?? "")} alt={slot.room ?? ""} className="w-full object-cover max-h-40 rounded-t-sm opacity-70"/>

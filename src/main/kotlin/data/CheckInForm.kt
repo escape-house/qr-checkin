@@ -9,4 +9,5 @@ data class CheckInForm(
     val email: String?,
     val agreesToTermsAndCondition: Boolean,
     val wantsPhotosOnline: Boolean,
+    val wantsNewsletter: Boolean = false,
 )

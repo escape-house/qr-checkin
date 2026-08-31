@@ -1,5 +1,5 @@
 import {createContext, useContext, useState, type ReactNode} from "react"
-import translations, {type TranslationKey} from "./translations.ts"
+import translations, {type TranslationKey, roomNameTranslations} from "./translations.ts"
 
 export type Lang = "de" | "en"
 
@@ -7,6 +7,7 @@ interface LanguageContextValue {
     lang: Lang
     setLang: (lang: Lang) => void
     t: (key: TranslationKey) => string
+    tRoomName: (name: string) => string
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null)
@@ -25,8 +26,13 @@ export function LanguageProvider({children}: {children: ReactNode}) {
         return translations[key][lang]
     }
 
+    function tRoom(name: string): string {
+        if (lang === "de") return name
+        return roomNameTranslations[name] ?? name
+    }
+
     return (
-        <LanguageContext.Provider value={{lang, setLang, t}}>
+        <LanguageContext.Provider value={{lang, setLang, t, tRoomName: tRoom}}>
             {children}
         </LanguageContext.Provider>
     )

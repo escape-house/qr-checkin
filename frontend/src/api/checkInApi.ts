@@ -21,6 +21,7 @@ export type CheckInFormData = {
     email: string
     agreesToTermsAndCondition: boolean
     wantsPhotosOnline: boolean
+    wantsNewsletter: boolean
 }
 
 export async function fetchRooms(): Promise<string[]> {

@@ -103,6 +103,10 @@ const translations = {
         de: "Ich bin damit einverstanden, dass Fotos von mir auf den Escape House Social Media Kanälen veröffentlicht werden dürfen.",
         en: "I agree that photos of me may be published on the Escape House social media channels.",
     },
+    formNewsletter: {
+        de: "Ich möchte den Newsletter von Escape House Vorchdorf erhalten.",
+        en: "I want to receive newsletters from Escape House Vorchdorf.",
+    },
     formSubmitLoading: {
         de: "Wird eingecheckt…",
         en: "Checking in…",
@@ -216,3 +220,12 @@ const translations = {
 
 export type TranslationKey = keyof typeof translations
 export default translations
+
+// Room name translations — key is the German name from Quinbook, value is the English display name.
+export const roomNameTranslations: Record<string, string> = {
+    "Die zauberhafte Winkelgasse": "The Magical Alley",
+    "Jack the Ripper":            "Jack the Ripper",
+    "Saw":                        "Saw",
+    "Villa des Wahnsinns":        "Villa of Madness",
+    "Western Bank":               "Western Bank",
+}

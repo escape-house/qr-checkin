@@ -15,6 +15,8 @@ export type AdminSlot = {
     room: string | null
     checkedInPlayers: AdminCheckInPlayer[]
     type: string
+    comment?: string
+    language?: string
 }
 
 export type SlotStatus = "blocked" | "notBooked" | "checkin" | "active" | "past" | "future"

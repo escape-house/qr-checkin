@@ -104,6 +104,9 @@ export function SlotCard({slot, status}: Props) {
                         {start.toLocaleTimeString("de-AT", TIME_FORMAT)}
                     </span>
                     <div className="flex items-center gap-1.5">
+                        {slot.language === "en" && (
+                            <span className="text-xs leading-none" title="English booking">🇬🇧</span>
+                        )}
                         {allPhotosOk && (
                             <span className="text-xs leading-none" title="Alle erlauben Fotos">📷</span>
                         )}
@@ -131,6 +134,11 @@ export function SlotCard({slot, status}: Props) {
                 {/* Name */}
                 <div className="text-sm font-medium leading-tight truncate" title={displayName}>
                     {displayName}
+                </div>
+
+                {/* Internal comment */}
+                <div className={"text-xs italic opacity-70 leading-tight truncate"+slot.comment?"":" invisible"} title={slot.comment}>
+                    {slot.comment}
                 </div>
 
                 {/* Progress + count — always rendered to keep uniform card height */}

@@ -114,6 +114,10 @@ class MongoCheckInRepositoryImpl(
                 "wantsPhotosOnline",
                 update.wantsPhotosOnline,
             ),
+            Updates.set(
+                "wantsNewsletter",
+                update.wantsNewsletter,
+            ),
         )
 
         return collection.findOneAndUpdate(
