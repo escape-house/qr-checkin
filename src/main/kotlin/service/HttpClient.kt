@@ -15,7 +15,7 @@ fun provideHttpClient(
 ): HttpClient {
     val client = HttpClient(CIO) {
         install(Logging) {
-            level = LogLevel.INFO
+            level = LogLevel.NONE
         }
         install(ContentNegotiation){
                 json(Json {

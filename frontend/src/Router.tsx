@@ -1,4 +1,4 @@
-import {BrowserRouter, Navigate, Route, Routes, ScrollRestoration} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import CheckInOverviewPage from "./routes/CheckInOverviewPage.tsx";
 import CheckInPage from "./routes/CheckInPage.tsx";
 import AllRoomsPage from "./routes/AllRoomsPage.tsx";
@@ -17,7 +17,6 @@ function Router() {
     return (
         <>
         <BrowserRouter>
-            <ScrollRestoration />
             <Routes>
                 <Route element={<CheckInLayout />}>
                     <Route path="/" element={<CheckInOverviewPage />} />

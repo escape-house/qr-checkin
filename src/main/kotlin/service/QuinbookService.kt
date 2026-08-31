@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import org.slf4j.LoggerFactory
 import java.time.LocalDate
 import java.time.LocalDateTime
 import kotlin.time.Duration
@@ -23,6 +24,8 @@ class QuinbookService(
     val quinBookAuth: QuinbookAuth,
     val backgroundScope: CoroutineScope
 ) {
+
+    private val log = LoggerFactory.getLogger(QuinbookService::class.java)
 
     private val cacheTimeout: Duration = 5.minutes
     private val hardCacheTimeout: Duration = 30.minutes
@@ -61,7 +64,7 @@ class QuinbookService(
             try {
                 refreshCacheIfRequired() //Launch in Thread
             } catch (exception: Exception) {
-                println("Could not refresh slots cache: ${exception.message}")
+                log.warn("Could not refresh slots cache: ${exception.message}")
             }
         }
     }

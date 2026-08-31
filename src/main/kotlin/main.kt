@@ -60,8 +60,6 @@ fun Application.configureErrorHandling() {
 
 fun Application.configureCors() {
     install(CORS) {
-        allowHost("localhost:5173", schemes = listOf("http"))
-
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Post)
         allowMethod(HttpMethod.Put)
