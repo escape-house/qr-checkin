@@ -1,18 +1,11 @@
 import type {CheckInSlot, CheckInSlotDto} from "../types/Slot.ts";
 
 function isNotBooked(slot: CheckInSlot):boolean{
-    return (slot.companyName == null || slot.companyName === "") &&
-           (slot.name == null || slot.name === "")
+    return slot.name == null || slot.name === ""
 }
 
 function isBooked(slot: CheckInSlot):boolean{
     return !isNotBooked(slot)
-}
-
-function getSlotDisplayName(slot: CheckInSlot){
-    if (slot.companyName != null && slot.companyName !== "") return slot.companyName.trim()
-    if (slot.name != null) return slot.name.trim()
-    return ""
 }
 
 function buildDisplayDate(start: Date): string {
@@ -51,7 +44,6 @@ function getRoomImageUrl(roomName: string){
 export const SlotUtils = {
     isBooked,
     isNotBooked,
-    getSlotDisplayName,
     fromDto,
     slotStartTimeComparator,
     getRoomImageUrl

@@ -10,7 +10,7 @@ type Props = {
 function SlotCardComponent({ slot }: Props) {
     const navigate = useNavigate()
     const { tRoomName } = useT()
-    const displayName = SlotUtils.getSlotDisplayName(slot)
+    const displayName = slot.name ?? ""
 
     return (
         <div

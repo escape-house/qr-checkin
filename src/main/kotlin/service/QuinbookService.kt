@@ -107,10 +107,10 @@ class QuinbookService(
         }
 
     suspend fun getCheckInSlots() =
-        getSlotsOfToday().filter { booking ->
+        getBookingsOfToday().filter { booking ->
             val now = LocalDateTime.now()
-            val checkInStart = booking.start.minusMinutes(30)
-            val checkInEnd = booking.start.plusMinutes(20)
+            val checkInStart = booking.start.minusMinutes(45)
+            val checkInEnd = booking.start.plusMinutes(10)
 
             !now.isBefore(checkInStart) && !now.isAfter(checkInEnd)
         }

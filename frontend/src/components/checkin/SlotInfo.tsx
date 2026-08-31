@@ -8,7 +8,8 @@ type Props = {
 
 function SlotInfo({slot}: Props) {
     const {t, tRoomName} = useT()
-    const displayName = SlotUtils.getSlotDisplayName(slot)
+    const displayName = slot.name ?? ""
+    console.log(slot)
 
     return (
         <div className="-mx-4 -mt-6 mb-2">
@@ -21,7 +22,7 @@ function SlotInfo({slot}: Props) {
                 <img
                     src={SlotUtils.getRoomImageUrl(slot.room ?? "")}
                     alt={slot.room ?? ""}
-                    className="w-full object-cover max-h-48 opacity-70 [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)]"
+                    className="w-full object-cover max-h-48 opacity-70 mask-[linear-gradient(to_bottom,black_60%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)]"
                 />
             </div>
 

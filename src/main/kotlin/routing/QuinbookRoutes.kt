@@ -2,7 +2,6 @@ package at.escapehouse.routes
 
 import at.escapehouse.data.ErrorResponse
 import at.escapehouse.dto.CheckinSlotDto
-import at.escapehouse.dto.PrivacyCheckinSlotDto
 import at.escapehouse.service.QuinbookAuth
 import at.escapehouse.service.QuinbookService
 import io.ktor.http.HttpStatusCode
@@ -26,7 +25,6 @@ fun Route.quinbookRoutes(
         get("/slot/{date}/{slotId}") {
             val dateParameter = call.parameters["date"]
                 ?: throw IllegalArgumentException("Missing date")
-            call.respond(quinbookService.getCheckInSlots().map(CheckinSlotDto::fromSlot))
 
             val date = try {
                 LocalDate.parse(dateParameter)
@@ -47,7 +45,7 @@ fun Route.quinbookRoutes(
                 )
                 return@get
             }
-            call.respond(status = HttpStatusCode.OK, message = PrivacyCheckinSlotDto.fromSlot(slot))
+            call.respond(status = HttpStatusCode.OK, message = CheckinSlotDto.fromSlot(slot))
         }
         get("/rooms") {
             val rooms = quinbookService.getSlotsOfToday()

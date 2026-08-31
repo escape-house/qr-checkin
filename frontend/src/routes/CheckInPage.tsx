@@ -24,7 +24,6 @@ function CheckInPage() {
         end: new Date(),
         players: null,
         name: null,
-        companyName: null,
         room: decodeURIComponent(roomName.replaceAll("_", " ")),
         displayDate: "",
     } : undefined

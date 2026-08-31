@@ -1,3 +1,22 @@
+import {createElement, type ReactNode} from "react"
+
+// Renders **bold** and *italic* markers in translation strings.
+export function renderTextWeight(text: string): ReactNode[] {
+    const result: ReactNode[] = []
+    const regex = /\*\*(.+?)\*\*|\*(.+?)\*/g
+    let last = 0, key = 0, match: RegExpExecArray | null
+    while ((match = regex.exec(text)) !== null) {
+        if (match.index > last) result.push(text.slice(last, match.index))
+        if (match[1] !== undefined)
+            result.push(createElement("strong", {key: key++, className: "font-semibold text-text"}, match[1]))
+        else
+            result.push(createElement("em", {key: key++}, match[2]))
+        last = regex.lastIndex
+    }
+    if (last < text.length) result.push(text.slice(last))
+    return result
+}
+
 const translations = {
 
     // ── General ────────────────────────────────────────────────
@@ -112,8 +131,8 @@ const translations = {
         en: "I want to receive newsletters from Escape House Vorchdorf.",
     },
     formRequiredField: {
-        de: "* Pflichtfeld",
-        en: "* Required field",
+        de: "Pflichtfeld",
+        en: "Required field",
     },
     formSubmitLoading: {
         de: "Wird eingecheckt…",
@@ -139,8 +158,8 @@ const translations = {
         en: "Health",
     },
     houseRulesHealthText: {
-        de: "Gesundheitliche Einschränkungen, insbesondere Epilepsie, Klaustrophobie, Herz-/Kreislaufprobleme, Rückenbeschwerden oder Schwangerschaft, sind dem Gamemaster vor Spielbeginn mitzuteilen.",
-        en: "Health restrictions, in particular epilepsy, claustrophobia, heart/circulatory problems, back problems or pregnancy, must be disclosed to the gamemaster before the game begins.",
+        de: "Gesundheitliche Einschränkungen, insbesondere **Epilepsie, Klaustrophobie, Herz-/Kreislaufprobleme, Rückenbeschwerden oder Schwangerschaft**, sind dem Gamemaster vor Spielbeginn mitzuteilen.",
+        en: "Health restrictions, in particular **epilepsy, claustrophobia, heart/circulatory problems, back problems or pregnancy**, must be disclosed to the gamemaster before the game begins.",
     },
 
     houseRulesInstructionsTitle: {
@@ -148,8 +167,8 @@ const translations = {
         en: "Instructions",
     },
     houseRulesInstructionsText: {
-        de: "Den Anweisungen des Personals sowie allen Sicherheits- und Verbotshinweisen ist jederzeit Folge zu leisten.",
-        en: "The instructions of the staff and all safety and prohibition notices must be followed at all times.",
+        de: "Den **Anweisungen des Personals** sowie allen Sicherheits- und Verbotshinweisen ist jederzeit Folge zu leisten.",
+        en: "The **instructions of the staff** and all safety and prohibition notices must be followed at all times.",
     },
 
     houseRulesNoViolenceTitle: {
@@ -157,7 +176,7 @@ const translations = {
         en: "No Violence",
     },
     houseRulesNoViolenceText: {
-        de: "Einrichtungen, Türen, Möbel und Spielgegenstände dürfen nicht mit Gewalt geöffnet, bewegt, bestiegen oder zweckwidrig verwendet werden.",
+        de: "Einrichtungen, Türen, Möbel und Spielgegenstände dürfen **nicht mit Gewalt** geöffnet, bewegt, bestiegen oder zweckwidrig verwendet werden.",
         en: "Fixtures, doors, furniture and game items must not be opened, moved, climbed or used improperly by force.",
     },
 
@@ -166,8 +185,8 @@ const translations = {
         en: "Protection of Our Team",
     },
     houseRulesTeamProtectionText: {
-        de: "Gamemaster und Schauspieler dürfen nicht absichtlich berührt, festgehalten, bedrängt, bedroht oder beleidigt werden. Zum Schutz unserer Mitarbeiter kann der betreffende Teilnehmer sofort vom Spiel ausgeschlossen oder das gesamte Spiel abgebrochen werden. In diesem Fall besteht kein Anspruch auf Erstattung des Teilnehmer- bzw. Spielpreises oder auf einen Ersatztermin.",
-        en: "Gamemasters and actors must not be intentionally touched, restrained, harassed, threatened or insulted. To protect our staff, the participant in question may be immediately excluded from the game or the entire game may be terminated. In this case, there is no entitlement to a refund of the participation or game price, or to a replacement appointment.",
+        de: "Gamemaster und Schauspieler dürfen **nicht absichtlich berührt, festgehalten, bedrängt, bedroht oder beleidigt werden.** Zum Schutz unserer Mitarbeiter kann der betreffende Teilnehmer sofort vom Spiel ausgeschlossen oder das gesamte Spiel abgebrochen werden. In diesem Fall besteht kein Anspruch auf Erstattung des Teilnehmer- bzw. Spielpreises oder auf einen Ersatztermin.",
+        en: "Gamemasters and actors must **not be intentionally touched, restrained, harassed, threatened or insulted.** To protect our staff, the participant in question may be immediately excluded from the game or the entire game may be terminated. In this case, there is no entitlement to a refund of the participation or game price, or to a replacement appointment.",
     },
 
     houseRulesAlcoholTitle: {
@@ -175,8 +194,8 @@ const translations = {
         en: "Alcohol & Drugs",
     },
     houseRulesAlcoholText: {
-        de: "Bei erheblicher Beeinträchtigung durch Alkohol, Drogen oder andere berauschende Substanzen kann die Teilnahme nach Ermessen des Spielleiters verweigert oder das Spiel abgebrochen werden – insbesondere bei erhöhter Verletzungsgefahr, aggressivem oder beleidigendem Verhalten, Gewaltanwendung oder Missachtung der Regeln. Ein Anspruch auf Rückerstattung oder Ersatztermin besteht in diesem Fall nicht.",
-        en: "In the event of significant impairment due to alcohol, drugs or other intoxicating substances, participation may be refused or the game terminated at the discretion of the gamemaster — particularly in cases of increased risk of injury, aggressive or offensive behaviour, use of violence or disregard of the rules. There is no entitlement to a refund or replacement appointment in such cases.",
+        de: "Bei erheblicher Beeinträchtigung durch Alkohol, Drogen oder andere berauschende Substanzen kann die Teilnahme verweigert oder das Spiel abgebrochen werden. Ein Anspruch auf Rückerstattung oder Ersatztermin besteht in diesem Fall nicht.",
+        en: "In the event of significant impairment due to alcohol, drugs or other intoxicating substances, participation may be refused or the game terminated. There is no entitlement to a refund or replacement appointment in such cases.",
     },
 
     houseRulesGameStopTitle: {
@@ -184,8 +203,8 @@ const translations = {
         en: "Game Termination",
     },
     houseRulesGameStopText: {
-        de: "Bei einem freiwilligen oder vom Teilnehmer verursachten Abbruch bzw. Ausschluss besteht kein Anspruch auf Rückerstattung, Ersatzleistung oder Ersatztermin. Bei technischen Gebrechen sowie bei äußeren Einflüssen wie Naturkatastrophen, großflächigen Stromausfällen oder behördlichen Anordnungen gelten die gesetzlichen Bestimmungen.",
-        en: "In the event of a voluntary termination or exclusion caused by the participant, there is no entitlement to a refund, substitute service or replacement appointment. In the case of technical defects and external influences such as natural disasters, widespread power outages or official orders, the statutory provisions apply.",
+        de: "Bei einem freiwilligen oder vom Teilnehmer verursachten Abbruch bzw. Ausschluss besteht kein Anspruch auf Rückerstattung, Ersatzleistung oder Ersatztermin.",
+        en: "In the event of a voluntary termination or exclusion caused by the participant, there is no entitlement to a refund, substitute service or replacement appointment.",
     },
 
     houseRulesPersonalItemsTitle: {
@@ -193,8 +212,8 @@ const translations = {
         en: "Personal Items & Electronic Devices",
     },
     houseRulesPersonalItemsText: {
-        de: "Persönliche Gegenstände werden auf eigene Verantwortung verwahrt. Handys, Smartwatches, Kameras, Smart Glasses und vergleichbare Geräte sind entsprechend den Anweisungen des Personals zu verwahren. Dies dient insbesondere der Vermeidung unerlaubter Foto-/Videoaufnahmen, der Weitergabe von Spielinhalten und der Nutzung zusätzlicher Lichtquellen. Wird die Verwahrung verweigert, kann die Teilnahme am Spiel verweigert werden; ein Anspruch auf Rückerstattung oder Ersatztermin besteht in diesem Fall nicht.",
-        en: "Personal items are stored at the owner's own risk. Mobile phones, smartwatches, cameras, smart glasses and similar devices must be stored in accordance with staff instructions. This is intended in particular to prevent unauthorised photo/video recordings, the disclosure of game content and the use of additional light sources. If storage is refused, participation in the game may be denied; there is no entitlement to a refund or replacement appointment in this case.",
+        de: "**Handys, Smartwatches, Kameras, Smart Glasses** und vergleichbare Geräte sind entsprechend den Anweisungen des Personals zu verwahren. Wird die Verwahrung verweigert, kann die Teilnahme am Spiel verweigert werden; ein Anspruch auf Rückerstattung oder Ersatztermin besteht nicht.",
+        en: "**Mobile phones, smartwatches, cameras, smart glasses** and similar devices must be stored in accordance with staff instructions. If storage is refused, participation in the game may be denied; there is no entitlement to a refund or replacement appointment.",
     },
 
     houseRulesDamagesTitle: {
@@ -202,8 +221,8 @@ const translations = {
         en: "Damages",
     },
     houseRulesDamagesText: {
-        de: "Für schuldhaft verursachte Schäden, insbesondere durch Gewaltanwendung oder Missachtung von Anweisungen, haften die Verursacher nach den gesetzlichen Bestimmungen.",
-        en: "Those responsible are liable for damages caused through fault, in particular through the use of force or disregard of instructions, in accordance with the statutory provisions.",
+        de: "Für schuldhaft verursachte Schäden, insbesondere durch **Gewaltanwendung oder Missachtung von Anweisungen**, haften die Verursacher nach den gesetzlichen Bestimmungen.",
+        en: "Those responsible are **liable for damages** caused through fault, in particular through the use of force or disregard of instructions, in accordance with the statutory provisions.",
     },
 
     houseRulesSurveillanceTitle: {
@@ -211,8 +230,8 @@ const translations = {
         en: "Video Surveillance",
     },
     houseRulesSurveillanceText: {
-        de: "Die Themenräume werden während des Spiels zur Spielbetreuung und Sicherheit videoüberwacht.",
-        en: "The themed rooms are video-monitored during the game for supervision and safety purposes.",
+        de: "Die Themenräume werden während des Spiels zur Spielbetreuung und Sicherheit **videoüberwacht**.",
+        en: "The themed rooms are **video-monitored** during the game for supervision and safety purposes.",
     },
 
     houseRulesSafetyTitle: {
@@ -220,8 +239,8 @@ const translations = {
         en: "Safety",
     },
     houseRulesSafetyText: {
-        de: "Notausgänge, Fluchtwege und Sicherheitseinrichtungen dürfen nicht blockiert oder manipuliert werden.",
-        en: "Emergency exits, escape routes and safety equipment must not be blocked or tampered with.",
+        de: "**Notausgänge, Fluchtwege und Sicherheitseinrichtungen** dürfen nicht blockiert oder manipuliert werden.",
+        en: "**Emergency exits, escape routes and safety equipment** must not be blocked or tampered with.",
     },
 
 } satisfies Record<string, { de: string; en: string }>
@@ -234,6 +253,6 @@ export const roomNameTranslations: Record<string, string> = {
     "Die zauberhafte Winkelgasse": "Die zauberhafte Winkelgasse",
     "Jack the Ripper":            "Jack the Ripper",
     "Saw":                        "Saw",
-    "Villa des Wahnsinns":        "Villa of Madness",
+    "Villa des Wahnsinns":        "Villa of Madness1",
     "Western Bank":               "Western Bank",
 }

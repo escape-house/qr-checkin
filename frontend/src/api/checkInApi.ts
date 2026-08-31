@@ -11,7 +11,10 @@ export async function fetchCheckInSlots() {
 export async function fetchCheckInSlot(date: string, slotId: string) {
     const response = await fetch(`/api/quinbook/slot/${date}/${slotId}`)
     if (!response.ok) throw new Error("Failed to fetch slot")
+    console.log(response)
     const dto: CheckInSlotDto = await response.json()
+    console.log(dto)
+    console.log(SlotUtils.fromDto(dto))
     return SlotUtils.fromDto(dto)
 }
 
