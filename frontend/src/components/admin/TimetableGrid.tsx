@@ -29,19 +29,19 @@ export function TimetableGrid({slots, now}: Props) {
 
     const seenRooms: string[] = []
     for (const slot of slots) {
-        const room = slot.room ?? "Unbekannt"
+        const room = (slot.room ?? "Unbekannt").toLowerCase()
         if (!seenRooms.includes(room)) seenRooms.push(room)
     }
 
     const roomOrder = [
-        ...configuredOrder.filter(r => seenRooms.some(s => s.toLowerCase() === r)),
-        ...seenRooms.filter(s => !configuredOrder.includes(s.toLowerCase())),
+        ...configuredOrder.filter(r => seenRooms.includes(r)),
+        ...seenRooms.filter(s => !configuredOrder.includes(s)),
     ].slice(0, 6)
 
     const byRoom = new Map<string, AdminSlot[]>()
     for (const room of roomOrder) byRoom.set(room, [])
     for (const slot of slots) {
-        const room = slot.room ?? "Unbekannt"
+        const room = (slot.room ?? "Unbekannt").toLowerCase()
         byRoom.get(room)?.push(slot)
     }
 
