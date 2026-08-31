@@ -38,7 +38,7 @@ function AdminLayout() {
     return (
         <div className="min-h-screen flex flex-col">
             <AdminHeader />
-            <main className="flex-1 p-4">
+            <main className="flex-1 p-3 py-1">
                 <Outlet />
             </main>
             <AdminFooter

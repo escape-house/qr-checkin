@@ -86,10 +86,10 @@ function AdminHeader() {
     return (
         <header className="bg-surface border-b border-border">
             {/* Row 1: logo | time + (mobile: date picker) + QR */}
-            <div className="px-4 py-2 flex items-center justify-between gap-4">
+            <div className="px-4 py-1 flex items-center justify-between gap-4">
                 <img src="/logo.png" alt="Logo" className="h-8 shrink-0 hidden md:block"/>
                 <div className="flex items-center gap-3">
-                    <div className="text-2xl font-semibold tabular-nums leading-none">{time}</div>
+                    <div className="text-3xl font-bold font-sans tabular-nums leading-none">{time}</div>
                     {onTimetable && (
                         <div className="md:hidden">
                             <TimetableDatePicker />
