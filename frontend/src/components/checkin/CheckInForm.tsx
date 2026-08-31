@@ -95,7 +95,7 @@ function CheckInForm({slot, onSuccess}: Props) {
                 {t("formNewsletter")}
             </Checkbox>
 
-            <p className="text-xs text-text-secondary">{t("formRequiredField")}</p>
+            <p className="text-xs text-text-secondary"><span className="text-error">*</span> {t("formRequiredField")}</p>
 
             {mutation.isError && (
                 <p className="text-sm text-error">{t("formError")}</p>
