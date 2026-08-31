@@ -42,9 +42,6 @@ dependencies {
     implementation("io.ktor:ktor-server-auth:3.5.2")
     implementation("io.ktor:ktor-server-sessions:3.5.2")
 
-    implementation("io.ktor:ktor-server-openapi:3.5.2")
-    implementation("io.ktor:ktor-server-routing-openapi:3.5.2")
-
     implementation("org.mongodb:mongodb-driver-kotlin-coroutine:5.9.0")
 
     implementation("io.ktor:ktor-server-status-pages:3.5.2")
@@ -87,6 +84,7 @@ val npmBuild by tasks.registering(Exec::class) {
     workingDir(frontendDirectory.asFile)
     commandLine(npmExecutable, "run", "build")
 
+    inputs.file(dotEnvFile)
     inputs.files(
         fileTree(frontendDirectory) {
             exclude(
@@ -95,6 +93,10 @@ val npmBuild by tasks.registering(Exec::class) {
             )
         }
     )
+
+    doFirst {
+        environment(dotEnvVariables.get())
+    }
 
     outputs.dir(frontendDistDirectory)
 }
