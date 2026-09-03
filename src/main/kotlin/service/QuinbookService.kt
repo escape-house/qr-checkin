@@ -14,6 +14,7 @@ import kotlinx.coroutines.sync.withLock
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 
@@ -108,7 +109,7 @@ class QuinbookService(
 
     suspend fun getCheckInSlots() =
         getBookingsOfToday().filter { booking ->
-            val now = LocalDateTime.now()
+            val now = LocalDateTime.now(ZoneId.of("Europe/Vienna"))
             val checkInStart = booking.start.minusMinutes(45)
             val checkInEnd = booking.start.plusMinutes(10)
 
