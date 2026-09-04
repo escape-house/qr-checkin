@@ -9,7 +9,6 @@ type Props = {
 function SlotInfo({slot}: Props) {
     const {t, tRoomName} = useT()
     const displayName = slot.name ?? ""
-    console.log(slot)
 
     return (
         <div className="-mx-4 -mt-6 mb-2">
@@ -32,7 +31,7 @@ function SlotInfo({slot}: Props) {
                         <div>{slot.displayDate}</div>
                         {displayName && <div>{displayName}</div>}
                     </div>
-                    {slot.players != null && (
+                    {slot.players != null && slot.players > 1 && (
                         <div className="text-text-secondary mt-1">{slot.players} {t("slotPersons")}</div>
                     )}
                 </div>
