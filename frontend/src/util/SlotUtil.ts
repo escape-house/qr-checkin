@@ -38,7 +38,7 @@ function getRoomImageUrl(roomName: string){
         .replace(/[^a-z0-9]+/g, "_")
         .replace(/^_+|_+$/g, "");
 
-    return `/rooms/${fileName}.jpg`;
+    return `/rooms/${fileName}.webp`;
 }
 
 export const SlotUtils = {

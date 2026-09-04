@@ -3,6 +3,7 @@ import type {AdminSlot} from "../../api/dashboardApi.ts"
 import {getSlotStatus} from "../../api/dashboardApi.ts"
 import {fetchConfig} from "../../api/configApi.ts"
 import {SlotCard} from "./SlotCard.tsx"
+import {SlotUtils} from "../../util/SlotUtil.ts";
 
 type Props = {
     slots: AdminSlot[]
@@ -10,11 +11,6 @@ type Props = {
 }
 
 const DEFAULT_ROOM_ORDER = ["unfinished", "villa des wahnsinns", "die zauberhafte winkelgasse", "western bank", "jack the ripper", "saw"]
-
-function roomImageSrc(room: string): string {
-    const key = room.toLowerCase().replace(/\s+/g, "_")
-    return `/rooms/${key}.jpg`
-}
 
 export function TimetableGrid({slots, now}: Props) {
     const {data: config} = useQuery({
@@ -65,7 +61,7 @@ export function TimetableGrid({slots, now}: Props) {
                         <div className="rounded-md overflow-hidden border border-border">
                             <div className="h-16 relative">
                                 <img
-                                    src={roomImageSrc(room)}
+                                    src={SlotUtils.getRoomImageUrl(room)}
                                     alt={room}
                                     onError={e => { (e.currentTarget as HTMLImageElement).src = "/rooms/placeholder.jpg" }}
                                     className="w-full h-full object-cover"
