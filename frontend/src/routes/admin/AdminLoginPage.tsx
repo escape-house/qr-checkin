@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useEffect, useRef, useState} from "react"
 import {Navigate, useNavigate, useSearchParams} from "react-router-dom"
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
 import {fetchSession, login} from "../../api/adminApi.ts"
@@ -26,6 +26,16 @@ function AdminLoginPage() {
             navigate(redirect, {replace: true})
         },
     })
+
+    const autoSubmitRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    useEffect(() => {
+        if (autoSubmitRef.current) clearTimeout(autoSubmitRef.current)
+        if (password.trim()) {
+            autoSubmitRef.current = setTimeout(() => mutation.mutate(), 30_000)
+        }
+        return () => { if (autoSubmitRef.current) clearTimeout(autoSubmitRef.current) }
+    }, [password])
 
     if (sessionPending) {
         return <div className="flex items-center justify-center min-h-screen text-muted">Lade…</div>
