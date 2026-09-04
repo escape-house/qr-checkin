@@ -2,7 +2,6 @@ package at.escapehouse.routes
 
 import at.escapehouse.data.ErrorResponse
 import at.escapehouse.dto.CheckinSlotDto
-import at.escapehouse.service.QuinbookAuth
 import at.escapehouse.service.QuinbookService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.response.*
