@@ -11,7 +11,6 @@ import io.ktor.server.routing.*
 
 fun Application.configureRouting(
     quinbookService: QuinbookService,
-    quinbookAuth: QuinbookAuth,
     checkInService: CheckInService,
     adminRegistrationService: AdminRegistrationService,
     checkInRepository: CheckInRepository,
