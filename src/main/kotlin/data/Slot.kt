@@ -17,5 +17,6 @@ data class Slot(
     val customer: Customer?,
     val room: Room,
     val comment: String? = null,
-    val language: String? = null
+    val language: String? = null,
+    val hidden: Boolean? = null
 )

@@ -35,7 +35,8 @@ data class QuinbookSlotResponseDto(
                     name = roomDto?.name
                 ),
                 comment = slot.internalInfo?.takeIf { it.isNotBlank() },
-                language = slot.parseLanguage()
+                language = slot.parseLanguage(),
+                hidden = slot.hidden
             )
         }
     }
@@ -66,7 +67,8 @@ data class SlotDto(
     val customer: Customer?,
     val iEvent: Long,
     val internalInfo: String? = null,
-    val attributes: String? = null
+    val attributes: String? = null,
+    val hidden: Boolean?
 ){
     fun parseLanguage(): String? = attributes?.let { attrs ->
         runCatching {

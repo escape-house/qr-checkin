@@ -43,11 +43,11 @@ class QuinbookService(
     3. Soft timeout expired → background refresh, return stale cache immediately
     4. Cache fresh → return it directly
     */
-    suspend fun getSlotsOfToday(): List<Slot> {
-        val currentCache = cachedSlots
-        if (currentCache == null) {
-            return refreshCacheIfRequired()
-        }
+    suspend fun getSlotsOfToday(): List<Slot> =
+       getSlotsOfTodayUnfiltered().filter { it.hidden == null || !it.hidden }
+
+    private suspend fun getSlotsOfTodayUnfiltered(): List<Slot> {
+        val currentCache = cachedSlots ?: return refreshCacheIfRequired()
         if (isCacheExpired(hardCacheTimeout)) {
             return refreshCacheIfRequired()
         }
@@ -101,6 +101,7 @@ class QuinbookService(
     suspend fun getSlotsForDate(date: LocalDate): List<Slot> =
         if (date == LocalDate.now()) getSlotsOfToday()
         else fetchSlotsFromBackend(date)
+            .filter { it.hidden == null || !it.hidden }
 
     suspend fun getBookingsOfToday() =
         getSlotsOfToday().filter{
