@@ -1,4 +1,4 @@
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes, useLocation} from "react-router-dom";
 import CheckInOverviewPage from "./routes/CheckInOverviewPage.tsx";
 import CheckInPage from "./routes/CheckInPage.tsx";
 import AllRoomsPage from "./routes/AllRoomsPage.tsx";
@@ -11,12 +11,22 @@ import {AdminProtectedRoute} from "./components/AdminProtectedRoute.tsx"
 import AdminSlotQrPage from "./routes/admin/AdminSlotQrPage.tsx"
 import AdminBaseQrPage from "./routes/admin/AdminBaseQrPage.tsx";
 import KeyScreen from "./components/KeyScreen.tsx";
+import {type ReactNode, useLayoutEffect} from "react";
 
+
+const ScrollResetWrapper = ({children}: {children: ReactNode}) => {
+    const location = useLocation();
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
+    return children
+}
 function Router() {
 
     return (
         <>
         <BrowserRouter>
+            <ScrollResetWrapper>
             <Routes>
                 <Route element={<CheckInLayout />}>
                     <Route path="/" element={<CheckInOverviewPage />} />
@@ -36,6 +46,7 @@ function Router() {
                 </Route>
                 <Route path="*" element={<KeyScreen number={404}>Not Found</KeyScreen>} />
             </Routes>
+            </ScrollResetWrapper>
         </BrowserRouter>
         </>
     )
