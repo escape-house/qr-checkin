@@ -12,7 +12,6 @@ import java.time.format.DateTimeParseException
 
 fun Route.quinbookRoutes(
     quinbookService: QuinbookService,
-    quinbookAuth: QuinbookAuth
 ) {
     route("/quinbook") {
         get("/checkInSlots") {
