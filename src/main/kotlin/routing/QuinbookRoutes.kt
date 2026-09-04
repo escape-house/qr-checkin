@@ -54,8 +54,5 @@ fun Route.quinbookRoutes(
                 .sorted()
             call.respond(rooms)
         }
-        get("/token") {
-            call.respond(quinbookAuth.getBearerToken())
-        }
     }
 }
