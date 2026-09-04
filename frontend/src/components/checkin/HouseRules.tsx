@@ -21,7 +21,7 @@ function HouseRules() {
     return (
         <section className="rounded-lg border border-border bg-surface overflow-hidden">
             <div className="px-5 py-4 border-b border-border">
-                <h1 className="text-xl font-semibold font-sans tracking-wide uppercase text-text">{t("houseRulesTitle")}</h1>
+                <h1 className="text-xl font-semibold font-sans tracking-wide uppercase text-text wrap-break-word">{t("houseRulesTitle")}</h1>
             </div>
             <ol className="divide-y divide-border">
                 {RULES.map(({titleKey, textKey}, index) => (
